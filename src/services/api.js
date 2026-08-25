@@ -117,6 +117,7 @@ class ApiClient {
       data: config.data,
       body: config.body,
       timeout: config.timeout ?? this.timeout,
+      silent: config.silent,
       _retry: config._retry,
       _tokenRefreshAttempted: config._tokenRefreshAttempted,
     });
@@ -216,9 +217,13 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
+    const silent = error.config?.silent;
     // Manejar errores de conexión
     if (!error.response) {
-      if (error.code === 'ERR_NETWORK') {
+      if (silent) {
+        // Algunas vistas hacen reintentos controlados y muestran un único
+        // estado agregado, sin inundar al usuario con un toast por intento.
+      } else if (error.code === 'ERR_NETWORK') {
         toast.error('❌ Error de red: No se puede conectar con el servidor proxy.');
       } else if (error.code === 'ECONNABORTED') {
         toast.error('⏱️ Timeout: El servidor tardó demasiado en responder.');
@@ -231,6 +236,8 @@ api.interceptors.response.use(
     // Manejar errores HTTP específicos
     const status = error.response.status;
     const message = error.response.data?.message || error.message;
+
+    if (silent && status !== 401) return Promise.reject(error);
 
     switch (status) {
       case 401: {
@@ -336,7 +343,7 @@ export const fantasyAPI = {
   // sesión iniciada que `points` sigue siendo los puntos DE la jornada y no
   // el acumulado (Standings y StandingsEvolution dependen de ello).
   getLeagueRankingByWeek: (leagueId, week) => api.get(`${CMP}/leagues/${leagueId}/standing/${week}?x-lang=es`),
-  getLeagueActivity: (leagueId, index = 0) => api.get(`${CMP}/leagues/${leagueId}/activity/${index}?x-lang=es`),
+  getLeagueActivity: (leagueId, index = 0, config = {}) => api.get(`${CMP}/leagues/${leagueId}/activity/${index}?x-lang=es`, config),
 
   // Equipos
   getTeamData: (leagueId, teamId) => api.get(`${CMP}/leagues/${leagueId}/teams/${teamId}?x-lang=es`),
@@ -354,6 +361,7 @@ export const fantasyAPI = {
 
   // Jugadores
   getAllPlayers: () => api.get(`${CMP}/players?x-lang=es`).then(adaptPlayersResponse),
+  getPlayerMarketValue: (playerId, config = {}) => api.get(`${CMP}/player/${playerId}/market-value?x-lang=es`, config),
 
   // Jornadas y Calendario (el calendario 26/27 trae localId/visitorId en vez
   // de los objetos local/visitor: el adaptador los resuelve vía teams-master)
