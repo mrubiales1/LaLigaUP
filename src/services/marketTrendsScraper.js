@@ -11,6 +11,7 @@ import { normalizePlayerName, normalizeTeamName, extractMainSurname } from '../u
 import api from './api';
 
 const MARKET_TRENDS_URL = 'https://www.futbolfantasy.com/analytics/laliga-fantasy/mercado';
+const MARKET_PLAYER_DETAIL_URL = `${MARKET_TRENDS_URL}/detalle`;
 
 const FALLBACK_TEAM_MAPPING = {
   "1": "Athletic",
@@ -97,6 +98,7 @@ export const parseMarketData = (htmlText) => {
       const elementText = playerElements[i];
 
       const nombreMatch = elementText.match(/data-nombre="([^"]+)"/);
+      const idMatch = elementText.match(/data-id="(\d+)"/);
       const posicionMatch = elementText.match(/data-posicion="([^"]+)"/);
       const valorMatch = elementText.match(/data-valor="(\d+)"/);
       const diferencia1Match = elementText.match(/data-diferencia1="([^"]+)"/);
@@ -130,6 +132,7 @@ export const parseMarketData = (htmlText) => {
       const key = `${normalizedName}|${normalizedPositionStr}|${normalizedTeamNameStr}`;
 
       const playerData = {
+        futbolFantasyId: idMatch ? idMatch[1] : null,
         nombre: normalizedName,
         originalName: nombre,
         // Precalculado para el nivel-3 de findTrendCacheMatch (camino caliente)
@@ -165,13 +168,37 @@ export const parseMarketData = (htmlText) => {
  * HTML string; throws on failure.
  */
 export const fetchMarketHtml = async () => {
+  return fetchFutbolFantasyHtml(MARKET_TRENDS_URL);
+};
+
+/** Extrae la cifra oficial incrustada en el detalle del jugador. Cero
+ * significa que FútbolFantasy muestra "Sin rentabilidad". */
+export const parseMaxProfitableBid = (htmlText) => {
+  if (typeof htmlText !== 'string') return null;
+  const match = htmlText.match(/puja_ideal\s*=\s*parsePujaIdeal\(\s*(\d+)\s*\)/i);
+  if (!match) return null;
+  const amount = Number.parseInt(match[1], 10);
+  return Number.isFinite(amount) ? amount : null;
+};
+
+export const fetchMaxProfitableBid = async (futbolFantasyId) => {
+  if (!/^\d+$/.test(String(futbolFantasyId || ''))) {
+    throw new Error('Invalid FutbolFantasy player id');
+  }
+  const html = await fetchFutbolFantasyHtml(`${MARKET_PLAYER_DETAIL_URL}/${futbolFantasyId}`);
+  const amount = parseMaxProfitableBid(html);
+  if (amount === null) throw new Error('Maximum profitable bid not found');
+  return amount;
+};
+
+const fetchFutbolFantasyHtml = async (targetUrl) => {
   const isElectron = typeof window !== 'undefined' && window.electronAPI !== undefined;
   const isDev = process.env.NODE_ENV === 'development';
 
   const fetchViaProxy = async () => {
     const { data } = await api.get('/v4/scrape/market', {
-      params: { url: MARKET_TRENDS_URL },
-      timeout: 15000,
+      params: { url: targetUrl },
+      timeout: 20000,
     });
     if (!data || !data.html) {
       throw new Error('Market scrape returned empty payload');
@@ -182,7 +209,7 @@ export const fetchMarketHtml = async () => {
   if (isElectron && !isDev) {
     try {
       const result = await window.electronAPI.apiRequest({
-        url: MARKET_TRENDS_URL,
+        url: targetUrl,
         method: 'GET',
         headers: {
           'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',

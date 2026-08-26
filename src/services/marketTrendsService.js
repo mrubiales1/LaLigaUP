@@ -16,15 +16,27 @@ import {
     findTrendCacheMatch,
     mapSpecialNameForTrends,
 } from '../utils/playerNameMatcher';
-import { fetchMarketHtml, parseMarketData } from './marketTrendsScraper';
+import { fetchMarketHtml, fetchMaxProfitableBid, parseMarketData } from './marketTrendsScraper';
+
+const sleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+const isRateLimitError = (error) =>
+    error?.code === 'BID_SCAN_PAUSED' ||
+    error?.response?.status === 429 ||
+    error?.response?.data?.status === 429;
 
 class MarketTrendsService {
     constructor() {
         this.marketValuesCache = new Map();
         this.lastMarketScrape = null;
         this.CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+        this.BID_CACHE_DURATION = 6 * 60 * 60 * 1000;
+        this.BID_REQUEST_INTERVAL = 1500;
         this.STORAGE_KEY = 'laliga_market_trends';
         this.LAST_SCRAPE_KEY = 'laliga_market_trends_timestamp';
+        this._bidQueue = Promise.resolve();
+        this._bidRequestPromises = new Map();
+        this._nextBidRequestAt = 0;
+        this._bidBlockedUntil = 0;
 
         // Load cached data on initialization
         this.loadCachedData();
@@ -83,6 +95,25 @@ class MarketTrendsService {
                     playersCount: 0,
                     source: 'failed'
                 };
+            }
+
+            // Un refresco manual del mercado no debe volver a consultar todas
+            // las fichas individuales. Conservamos las pujas aún vigentes por
+            // id de FútbolFantasy y solo se renuevan cada seis horas.
+            const previousById = new Map();
+            for (const previous of this.marketValuesCache.values()) {
+                if (previous.futbolFantasyId) previousById.set(previous.futbolFantasyId, previous);
+            }
+            const now = Date.now();
+            for (const current of newCache.values()) {
+                const previous = previousById.get(current.futbolFantasyId);
+                const fetchedAt = previous?.maxProfitableBidFetchedAt
+                    ? new Date(previous.maxProfitableBidFetchedAt).getTime()
+                    : 0;
+                if (Number.isFinite(previous?.maxProfitableBid) && now - fetchedAt < this.BID_CACHE_DURATION) {
+                    current.maxProfitableBid = previous.maxProfitableBid;
+                    current.maxProfitableBidFetchedAt = previous.maxProfitableBidFetchedAt;
+                }
             }
 
             this.marketValuesCache = newCache;
@@ -148,6 +179,115 @@ class MarketTrendsService {
             trend = this.findTrendBySubstringScan(displayName, player.positionId);
         }
         return trend;
+    }
+
+    /**
+     * Completa únicamente los jugadores solicitados con la cifra oficial de
+     * "Puja máxima rentable" de su ficha de FútbolFantasy. Las respuestas se
+     * guardan junto a la caché diaria del mercado; un valor 0 representa
+     * "Sin rentabilidad" y también se considera una respuesta válida.
+     */
+    async hydrateMaxProfitableBids(players, { onProgress } = {}) {
+        const collectTrends = () => {
+            const collected = [];
+            const seenIds = new Set();
+            let hasLegacyEntries = false;
+            for (const player of players || []) {
+                const trend = this.resolveTrendForPlayer(player);
+                const id = trend?.futbolFantasyId;
+                if (trend && id === undefined) hasLegacyEntries = true;
+                if (!id || seenIds.has(id)) continue;
+                seenIds.add(id);
+                collected.push(trend);
+            }
+            return { collected, hasLegacyEntries };
+        };
+
+        let { collected: trends, hasLegacyEntries } = collectTrends();
+        // Las cachés creadas por versiones anteriores no guardaban el id de
+        // FútbolFantasy. Se migran solas con un único refresco del mercado.
+        if (hasLegacyEntries) {
+            const refreshResult = await this.fetchMarketValues();
+            if (refreshResult.success) ({ collected: trends } = collectTrends());
+        }
+
+        const now = Date.now();
+        const pending = trends.filter((trend) => {
+            const fetchedAt = trend.maxProfitableBidFetchedAt
+                ? new Date(trend.maxProfitableBidFetchedAt).getTime()
+                : 0;
+            return !Number.isFinite(trend.maxProfitableBid) || now - fetchedAt >= this.BID_CACHE_DURATION;
+        });
+        let completed = 0;
+        let failed = 0;
+        let paused = false;
+        let unsavedResults = 0;
+
+        onProgress?.({ completed, total: pending.length, paused, failed });
+        for (const trend of pending) {
+            try {
+                trend.maxProfitableBid = await this._fetchMaxProfitableBidQueued(trend.futbolFantasyId);
+                trend.maxProfitableBidFetchedAt = new Date().toISOString();
+                unsavedResults += 1;
+                // localStorage es síncrono: agrupamos escrituras para que el
+                // escaneo progresivo tampoco produzca tirones en la interfaz.
+                if (unsavedResults >= 5) {
+                    this.saveCachedData();
+                    unsavedResults = 0;
+                }
+            } catch (error) {
+                if (isRateLimitError(error)) {
+                    paused = true;
+                    onProgress?.({ completed, total: pending.length, paused, failed });
+                    break;
+                }
+                failed += 1;
+            }
+            completed += 1;
+            onProgress?.({ completed, total: pending.length, paused, failed });
+        }
+        if (unsavedResults > 0) this.saveCachedData();
+
+        return {
+            requested: trends.length,
+            total: pending.length,
+            fetched: completed - failed,
+            completed,
+            failed,
+            paused,
+            available: trends.filter((trend) => Number.isFinite(trend.maxProfitableBid)).length,
+        };
+    }
+
+    /** Cola global, deduplicada y espaciada. Ante el primer 429 abre un
+     * enfriamiento de cinco minutos y no sigue golpeando el servidor. */
+    _fetchMaxProfitableBidQueued(futbolFantasyId) {
+        const id = String(futbolFantasyId);
+        if (this._bidRequestPromises.has(id)) return this._bidRequestPromises.get(id);
+
+        const request = this._bidQueue.then(async () => {
+            if (Date.now() < this._bidBlockedUntil) {
+                const error = new Error('Profitable bid scan paused');
+                error.code = 'BID_SCAN_PAUSED';
+                throw error;
+            }
+
+            const waitMs = Math.max(0, this._nextBidRequestAt - Date.now());
+            if (waitMs > 0) await sleep(waitMs);
+            this._nextBidRequestAt = Date.now() + this.BID_REQUEST_INTERVAL;
+
+            try {
+                return await fetchMaxProfitableBid(id);
+            } catch (error) {
+                if (isRateLimitError(error)) this._bidBlockedUntil = Date.now() + 5 * 60 * 1000;
+                throw error;
+            }
+        });
+
+        this._bidQueue = request.catch(() => undefined);
+        this._bidRequestPromises.set(id, request);
+        request.finally(() => this._bidRequestPromises.delete(id)).catch(() => undefined);
+        return request;
     }
 
     /**
