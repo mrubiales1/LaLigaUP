@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import {
   Home, Trophy, ShoppingCart, Users, Calendar, Search, X, Moon, Sun,
   Activity, LogOut, Shield, User, Target, RefreshCw, Clock, Bug, FileText, Edit3,
-  CircleDollarSign,
+  CircleDollarSign, Gem,
 } from 'lucide-react';
 import { useAuthStore } from '../../stores/authStore';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -24,6 +24,7 @@ const MENU_ITEMS = [
   { path: '/', icon: Home, label: 'Dashboard' },
   { path: '/activity', icon: Activity, label: 'Actividad' },
   { path: '/salaries', icon: CircleDollarSign, label: 'Salarios' },
+  { path: '/bargains', icon: Gem, label: 'Chollos' },
   { path: '/standings', icon: Trophy, label: 'Clasificación' },
   { path: '/market', icon: ShoppingCart, label: 'Mercado' },
   { path: '/teams', icon: Users, label: 'Equipos' },

@@ -18,6 +18,7 @@ const Players = React.lazy(() => import(/* webpackChunkName: "players" */ './com
 const Clauses = React.lazy(() => import(/* webpackChunkName: "clauses" */ './components/Clauses/Clauses'));
 const Activity = React.lazy(() => import(/* webpackChunkName: "activity" */ './components/Activity/Activity'));
 const Salaries = React.lazy(() => import(/* webpackChunkName: "salaries" */ './components/Salaries/Salaries'));
+const Bargains = React.lazy(() => import(/* webpackChunkName: "bargains" */ './components/Bargains/Bargains'));
 const Lineup = React.lazy(() => import(/* webpackChunkName: "lineup" */ './components/Teams/Lineup'));
 const LineupEditor = React.lazy(() => import(/* webpackChunkName: "lineup-editor" */ './components/Teams/LineupEditor'));
 const TeamPlayers = React.lazy(() => import(/* webpackChunkName: "team-players" */ './components/Teams/TeamPlayers'));
@@ -101,6 +102,7 @@ function AppRoutes() {
         <Route path="/clauses" element={<Clauses />} />
         <Route path="/activity" element={<Activity />} />
         <Route path="/salaries" element={<Salaries />} />
+        <Route path="/bargains" element={<Bargains />} />
         <Route path="/alerts" element={<AlertManager />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/onces-probables" element={<OncesProbles />} />

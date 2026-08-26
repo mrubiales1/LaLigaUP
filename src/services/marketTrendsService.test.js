@@ -98,3 +98,51 @@ describe('marketTrendsService.findTrendBySubstringScan', () => {
         expect(marketTrendsService.findTrendBySubstringScan('', 4)).toBeNull();
     });
 });
+
+describe('marketTrendsService.hydrateMaxProfitableBids', () => {
+    afterEach(() => {
+        marketTrendsService.marketValuesCache = new Map();
+        marketTrendsService.lastMarketScrape = null;
+        jest.restoreAllMocks();
+    });
+
+    test('guarda cada puja y notifica el progreso incremental', async () => {
+        const entries = {
+            1: cacheEntry({ futbolFantasyId: '101' }),
+            2: cacheEntry({ futbolFantasyId: '102', originalName: 'Otro' }),
+        };
+        marketTrendsService.marketValuesCache = new Map(Object.entries(entries));
+        marketTrendsService.lastMarketScrape = new Date();
+        jest.spyOn(marketTrendsService, 'resolveTrendForPlayer').mockImplementation((player) => entries[player.id]);
+        jest.spyOn(marketTrendsService, '_fetchMaxProfitableBidQueued')
+            .mockResolvedValueOnce(21_000_000)
+            .mockResolvedValueOnce(18_000_000);
+        const onProgress = jest.fn();
+
+        const result = await marketTrendsService.hydrateMaxProfitableBids(
+            [{ id: 1 }, { id: 2 }],
+            { onProgress }
+        );
+
+        expect(result).toMatchObject({ total: 2, completed: 2, fetched: 2, paused: false });
+        expect(entries[1].maxProfitableBid).toBe(21_000_000);
+        expect(entries[1].maxProfitableBidFetchedAt).toBeTruthy();
+        expect(onProgress).toHaveBeenLastCalledWith({ completed: 2, total: 2, paused: false, failed: 0 });
+    });
+
+    test('se detiene en el primer 429 y no consulta las fichas restantes', async () => {
+        const entries = [1, 2, 3].map((id) => cacheEntry({ futbolFantasyId: String(id) }));
+        marketTrendsService.marketValuesCache = new Map(entries.map((entry, index) => [String(index), entry]));
+        marketTrendsService.lastMarketScrape = new Date();
+        jest.spyOn(marketTrendsService, 'resolveTrendForPlayer')
+            .mockImplementation((player) => entries[player.id - 1]);
+        const fetchSpy = jest.spyOn(marketTrendsService, '_fetchMaxProfitableBidQueued')
+            .mockResolvedValueOnce(10_000_000)
+            .mockRejectedValueOnce({ response: { status: 429 } });
+
+        const result = await marketTrendsService.hydrateMaxProfitableBids([{ id: 1 }, { id: 2 }, { id: 3 }]);
+
+        expect(result).toMatchObject({ total: 3, completed: 1, fetched: 1, paused: true });
+        expect(fetchSpy).toHaveBeenCalledTimes(2);
+    });
+});
