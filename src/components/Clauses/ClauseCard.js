@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from '../../utils/motionShim';
-import { Shield, Clock, TrendingUp, User, Euro } from 'lucide-react';
+import { Shield, Clock, TrendingUp, User, Euro, CalendarClock } from 'lucide-react';
 import { formatNumber, formatNumberWithDots, getPositionColor } from '../../utils/helpers';
 import ProgressiveImage from '../Common/ProgressiveImage';
 import { getClauseStatusColor, getClauseTimeRemaining } from '../../utils/clauseUtils';
@@ -8,7 +8,7 @@ import { getClauseStatusColor, getClauseTimeRemaining } from '../../utils/clause
 const getPositionBackgroundColor = () => 'bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800';
 
 const ClauseCard = React.memo(
-  ({ clause, onClick, onPayClause }) => {
+  ({ clause, onClick, onPayClause, onScheduleClause }) => {
     return (
       <motion.div
         className={`hover-scale overflow-hidden cursor-pointer transition-all duration-200 rounded-lg border border-gray-200 dark:border-gray-700 ${
@@ -167,6 +167,20 @@ const ClauseCard = React.memo(
                   </div>
                 )}
               </div>
+              {onScheduleClause && (
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    onScheduleClause();
+                  }}
+                  className="mt-3 w-full flex items-center justify-center gap-2 bg-violet-600 hover:bg-violet-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors"
+                  aria-label={`Programar clausulazo de ${clause.playerName}`}
+                >
+                  <CalendarClock className="w-4 h-4" aria-hidden="true" />
+                  Programar clausulazo
+                </button>
+              )}
             </div>
           )}
 

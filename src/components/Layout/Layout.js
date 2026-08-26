@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import {
   Home, Trophy, ShoppingCart, Users, Calendar, Search, X, Moon, Sun,
   Activity, LogOut, Shield, User, Target, RefreshCw, Clock, Bug, FileText, Edit3,
-  CircleDollarSign, Gem,
+  CircleDollarSign, Gem, Bot,
 } from 'lucide-react';
 import { useAuthStore } from '../../stores/authStore';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -18,6 +18,7 @@ import updateService from '../../services/updateService';
 import { sanitizeSearchTerm } from '../../utils/validation';
 import { setImageFallback, getPositionName, extractArray, formatCurrencyCompact as formatCurrency } from '../../utils/helpers';
 import MobileNav from './MobileNav';
+import AutomationRunner from '../Automate/AutomationRunner';
 
 // ---------- menu config ----------
 const MENU_ITEMS = [
@@ -25,6 +26,7 @@ const MENU_ITEMS = [
   { path: '/activity', icon: Activity, label: 'Actividad' },
   { path: '/salaries', icon: CircleDollarSign, label: 'Salarios' },
   { path: '/bargains', icon: Gem, label: 'Chollos' },
+  { path: '/automate', icon: Bot, label: 'Automate' },
   { path: '/standings', icon: Trophy, label: 'Clasificación' },
   { path: '/market', icon: ShoppingCart, label: 'Mercado' },
   { path: '/teams', icon: Users, label: 'Equipos' },
@@ -608,6 +610,7 @@ const Layout = ({ children }) => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-dark-bg overflow-x-hidden">
       <ApiStatus />
+      <AutomationRunner />
 
       <aside
         id="primary-sidebar"

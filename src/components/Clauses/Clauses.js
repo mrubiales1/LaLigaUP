@@ -25,6 +25,8 @@ import ClauseCard from './ClauseCard';
 import ClauseFilters from './ClauseFilters';
 import PaymentFlow from './PaymentFlow';
 import PaymentConfirmModal from './PaymentConfirmModal';
+import ScheduleActionModal from '../Automate/ScheduleActionModal';
+import { useAutomationStore } from '../../stores/automationStore';
 
 const CACHE_DURATION = 2 * 60 * 1000;
 
@@ -53,6 +55,8 @@ const Clauses = () => {
   const paymentFlow = useModalFlow();
   const [selectedClause, setSelectedClause] = useState(null);
   const [teamMoney, setTeamMoney] = useState(null);
+  const [clauseToSchedule, setClauseToSchedule] = useState(null);
+  const scheduleAction = useAutomationStore((state) => state.scheduleAction);
 
   // Standings query
   const { data: standings, isLoading: standingsLoading } = useQuery({
@@ -329,6 +333,34 @@ const Clauses = () => {
     paymentFlow.confirm();
   }, [paymentFlow]);
 
+  const handleScheduleClause = useCallback((maximumAmount) => {
+    if (!clauseToSchedule || !leagueId) return;
+    const userId = user?.userId || user?.id;
+    const executeAtMs = new Date(clauseToSchedule.unlockTime).getTime();
+    if (!userId || !Number.isFinite(executeAtMs) || executeAtMs <= Date.now()) {
+      toast.error('No se pudo determinar cuándo se desbloquea la cláusula');
+      return;
+    }
+    const executeAt = new Date(executeAtMs).toISOString();
+    scheduleAction({
+      type: 'clause',
+      userId,
+      leagueId,
+      playerId: clauseToSchedule.playerId,
+      playerTeamId: clauseToSchedule.playerTeamId,
+      sellerTeamId: clauseToSchedule.teamId,
+      playerName: clauseToSchedule.playerName,
+      playerImage: clauseToSchedule.playerImage,
+      teamName: clauseToSchedule.teamName,
+      maxAmount: maximumAmount,
+      currentAmount: clauseToSchedule.clausulaAmount,
+      executeAt,
+      unlockAt: executeAt,
+    });
+    setClauseToSchedule(null);
+    toast.success('Clausulazo programado. Puedes revisarlo en Automate.');
+  }, [clauseToSchedule, leagueId, user, scheduleAction]);
+
   const handleConfirmPayment = useCallback(async () => {
     if (!selectedClause) return;
 
@@ -505,6 +537,7 @@ const Clauses = () => {
                   clause={clause}
                   onClick={() => handlePlayerClick(clause)}
                   onPayClause={() => handlePayClause(clause)}
+                  onScheduleClause={clause.isLocked ? () => setClauseToSchedule(clause) : undefined}
                 />
               ))}
             </div>
@@ -544,6 +577,16 @@ const Clauses = () => {
         isProcessing={paymentFlow.isProcessing}
         onClose={closePayment}
         onConfirm={handleConfirmPayment}
+      />
+
+      <ScheduleActionModal
+        isOpen={!!clauseToSchedule}
+        type="clause"
+        playerName={clauseToSchedule?.playerName}
+        suggestedAmount={clauseToSchedule?.clausulaAmount}
+        executeAt={clauseToSchedule?.unlockTime}
+        onClose={() => setClauseToSchedule(null)}
+        onSchedule={handleScheduleClause}
       />
 
       {/* Player Detail Modal */}

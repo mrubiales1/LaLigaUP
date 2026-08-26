@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { Gem, RefreshCw, ShieldCheck, Clock3, LockKeyhole, Euro, ExternalLink, TrendingUp } from 'lucide-react';
+import { Gem, RefreshCw, ShieldCheck, Clock3, LockKeyhole, Euro, ExternalLink, TrendingUp, CalendarClock } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 import { fantasyAPI } from '../../services/api';
@@ -18,6 +18,8 @@ import LoadingSpinner from '../Common/LoadingSpinner';
 import EmptyState from '../Common/EmptyState';
 import PaymentFlow from '../Clauses/PaymentFlow';
 import PaymentConfirmModal from '../Clauses/PaymentConfirmModal';
+import ScheduleActionModal from '../Automate/ScheduleActionModal';
+import { useAutomationStore } from '../../stores/automationStore';
 
 const THRESHOLD_OPTIONS = [0, 1_000_000, 2_000_000, 3_000_000, 5_000_000];
 
@@ -49,9 +51,11 @@ const Bargains = () => {
   const paymentFlow = useModalFlow();
   const [threshold, setThreshold] = useState(2_000_000);
   const [selectedClause, setSelectedClause] = useState(null);
+  const [clauseToSchedule, setClauseToSchedule] = useState(null);
   const [teamMoney, setTeamMoney] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
   const [scanProgress, setScanProgress] = useState({ completed: 0, total: 0, paused: false, failed: 0 });
+  const scheduleAction = useAutomationStore((state) => state.scheduleAction);
 
   const { trendsReady, isLoading: trendsLoading } = useMarketTrends();
 
@@ -185,6 +189,34 @@ const Bargains = () => {
       paymentFlow.setProcessing(false);
     }
   }, [selectedClause, paymentFlow, leagueId, currentTeamId, queryClient, closePayment]);
+
+  const handleScheduleClause = useCallback((maximumAmount) => {
+    if (!clauseToSchedule || !leagueId) return;
+    const userId = user?.userId || user?.id;
+    const executeAtMs = new Date(clauseToSchedule.buyoutClauseLockedEndTime).getTime();
+    if (!userId || !Number.isFinite(executeAtMs) || executeAtMs <= Date.now()) {
+      toast.error('La cláusula ya no tiene una fecha futura de desbloqueo');
+      return;
+    }
+    const player = clauseToSchedule.player || {};
+    scheduleAction({
+      type: 'clause',
+      userId,
+      leagueId,
+      playerId: clauseToSchedule.playerId,
+      playerTeamId: clauseToSchedule.playerTeamId,
+      sellerTeamId: clauseToSchedule.teamId,
+      playerName: player.nickname || player.name || 'Jugador',
+      playerImage: player.images?.transparent?.['256x256'] || player.images?.['256x256'] || null,
+      teamName: player.team?.name || 'N/D',
+      maxAmount: maximumAmount,
+      currentAmount: clauseToSchedule.clausePrice,
+      executeAt: new Date(executeAtMs).toISOString(),
+      unlockAt: new Date(executeAtMs).toISOString(),
+    });
+    setClauseToSchedule(null);
+    toast.success('Clausulazo programado. Puedes revisarlo en Automate.');
+  }, [clauseToSchedule, leagueId, user, scheduleAction]);
 
   const handleRefresh = useCallback(async () => {
     setRefreshing(true);
@@ -359,7 +391,16 @@ const Bargains = () => {
                       <Euro className="w-4 h-4" /> Pagar cláusula
                     </button>
                   ) : (
-                    <span className="text-sm text-gray-500 dark:text-gray-400">Pago disponible al desbloquearse</span>
+                    <div className="flex flex-wrap items-center justify-end gap-2">
+                      <span className="text-sm text-gray-500 dark:text-gray-400">Pago disponible al desbloquearse</span>
+                      <button
+                        type="button"
+                        onClick={() => setClauseToSchedule(item)}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-700 text-white font-semibold"
+                      >
+                        <CalendarClock className="w-4 h-4" /> Programar clausulazo
+                      </button>
+                    </div>
                   )}
                 </div>
               </article>
@@ -388,6 +429,15 @@ const Bargains = () => {
         isProcessing={paymentFlow.isProcessing}
         onClose={closePayment}
         onConfirm={handleConfirmPayment}
+      />
+      <ScheduleActionModal
+        isOpen={!!clauseToSchedule}
+        type="clause"
+        playerName={clauseToSchedule?.player?.nickname || clauseToSchedule?.player?.name}
+        suggestedAmount={clauseToSchedule?.clausePrice}
+        executeAt={clauseToSchedule?.buyoutClauseLockedEndTime}
+        onClose={() => setClauseToSchedule(null)}
+        onSchedule={handleScheduleClause}
       />
     </div>
   );
