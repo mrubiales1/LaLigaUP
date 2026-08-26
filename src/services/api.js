@@ -346,7 +346,9 @@ export const fantasyAPI = {
   getLeagueActivity: (leagueId, index = 0, config = {}) => api.get(`${CMP}/leagues/${leagueId}/activity/${index}?x-lang=es`, config),
 
   // Equipos
-  getTeamData: (leagueId, teamId) => api.get(`${CMP}/leagues/${leagueId}/teams/${teamId}?x-lang=es`),
+  getTeamData: (leagueId, teamId, { fresh = false } = {}) => api.get(
+    `${CMP}/leagues/${leagueId}/teams/${teamId}?x-lang=es${fresh ? `&_=${Date.now()}` : ''}`
+  ),
   getTeamLineup: (teamId, week) => api.get(`${CMP}/teams/${teamId}/lineup/week/${week}?x-lang=es`),
 
   // Lineup Management
@@ -357,7 +359,9 @@ export const fantasyAPI = {
   getPremiumConfiguration: () => api.get('/v4/leagues/premium-configuration?x-lang=es'),
 
   // Mercado
-  getMarket: (leagueId) => api.get(`${CMP}/league/${leagueId}/market?x-lang=es`),
+  getMarket: (leagueId, { fresh = false } = {}) => api.get(
+    `${CMP}/league/${leagueId}/market?x-lang=es${fresh ? `&_=${Date.now()}` : ''}`
+  ),
 
   // Jugadores
   getAllPlayers: () => api.get(`${CMP}/players?x-lang=es`).then(adaptPlayersResponse),

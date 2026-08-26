@@ -64,7 +64,9 @@ async function createWindow() {
             contextIsolation: true,
             enableRemoteModule: false,
             sandbox: true,
-            preload: preloadPath
+            preload: preloadPath,
+            // Scheduled actions must keep their timers while the window is minimized.
+            backgroundThrottling: false
         },
         icon: path.join(__dirname, 'build-resources/fantasy_logo_transparent.png'),
         show: false,

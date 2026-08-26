@@ -23,6 +23,10 @@ import MyBidsSummary from './MyBidsSummary';
 import FilterBar, { POSITIONS } from './FilterBar';
 import PlayerListItem from './PlayerListItem';
 import { useBidFlow, BidModal } from './BidFlow';
+import ScheduleActionModal from '../Automate/ScheduleActionModal';
+import { useAutomationStore } from '../../stores/automationStore';
+import { computeBidExecutionTime } from '../../services/automationExecutor';
+import toast from 'react-hot-toast';
 
 const extractPlayers = extractArray;
 
@@ -42,6 +46,8 @@ const Market = () => {
   // Player detail modal
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [bidToSchedule, setBidToSchedule] = useState(null);
+  const scheduleAction = useAutomationStore((state) => state.scheduleAction);
 
   // Force re-render on offer changes (cards re-read teamService state)
   const [offerChangeKey, setOfferChangeKey] = useState(0);
@@ -127,6 +133,34 @@ const Market = () => {
     setIsModalOpen(false);
     setSelectedPlayer(null);
   }, []);
+
+  const handleScheduleBid = useCallback((amount) => {
+    if (!bidToSchedule || !leagueId) return;
+    const userId = user?.userId || user?.id;
+    const expiresAtMs = new Date(bidToSchedule.expirationDate).getTime();
+    const executeAt = computeBidExecutionTime(bidToSchedule.expirationDate);
+    if (!userId || !executeAt || expiresAtMs - Date.now() <= 30_000) {
+      toast.error('Quedan 30 segundos o menos; realiza la puja ahora de forma manual');
+      return;
+    }
+    const player = bidToSchedule.playerMaster;
+    scheduleAction({
+      type: 'bid',
+      userId,
+      leagueId,
+      marketId: bidToSchedule.id,
+      playerId: player.id,
+      playerName: player.nickname || player.name || 'Jugador',
+      playerImage: player.images?.transparent?.['256x256'] || null,
+      teamName: player.team?.name || 'N/D',
+      amount,
+      salePrice: bidToSchedule.salePrice,
+      executeAt,
+      expiresAt: new Date(expiresAtMs).toISOString(),
+    });
+    setBidToSchedule(null);
+    toast.success('Puja programada para 30 segundos antes del cierre.');
+  }, [bidToSchedule, leagueId, user, scheduleAction]);
 
   // --- Derived player list ---
   const playersArray = useMemo(() => extractPlayers(marketData), [marketData]);
@@ -328,6 +362,7 @@ const Market = () => {
                   playerOwnershipService={playerOwnershipService}
                   onPlayerClick={handlePlayerClick}
                   onBidClick={bidFlow.openBid}
+                  onScheduleBid={setBidToSchedule}
                   leagueId={leagueId}
                   refetch={refetch}
                   setOfferChangeKey={setOfferChangeKey}
@@ -366,6 +401,16 @@ const Market = () => {
         availableMoney={availableMoney}
         isModifying={bidFlow.isModifying}
         teamReady={teamReady}
+      />
+      <ScheduleActionModal
+        isOpen={!!bidToSchedule}
+        type="bid"
+        playerName={bidToSchedule?.playerMaster?.nickname || bidToSchedule?.playerMaster?.name}
+        suggestedAmount={Math.max(Number(bidToSchedule?.salePrice || 0), Number(bidToSchedule?.playerMaster?.marketValue || 0))}
+        minimumAmount={Math.max(Number(bidToSchedule?.salePrice || 0), Number(bidToSchedule?.playerMaster?.marketValue || 0))}
+        executeAt={bidToSchedule ? computeBidExecutionTime(bidToSchedule.expirationDate) : null}
+        onClose={() => setBidToSchedule(null)}
+        onSchedule={handleScheduleBid}
       />
     </div>
   );

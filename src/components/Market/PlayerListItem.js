@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Clock, User, Shield, Euro, X, Edit, TrendingUp } from 'lucide-react';
+import { Clock, User, Shield, Euro, X, Edit, TrendingUp, CalendarClock } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { formatNumber, formatNumberWithDots, getPositionColor } from '../../utils/helpers';
 import teamService from '../../services/teamService';
@@ -20,6 +20,7 @@ const PlayerListItem = ({
   playerOwnershipService,
   onPlayerClick,
   onBidClick,
+  onScheduleBid,
   leagueId,
   refetch,
   setOfferChangeKey,
@@ -256,19 +257,34 @@ const PlayerListItem = ({
               </div>
             </div>
           ) : (
-            <button
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                onBidClick?.(item);
-              }}
-              onMouseDown={(e) => e.preventDefault()}
-              className="w-full bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
-            >
-              <Euro className="w-4 h-4" />
-              Pujar
-            </button>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onBidClick?.(item);
+                }}
+                onMouseDown={(e) => e.preventDefault()}
+                className="w-full bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-3 rounded-lg transition-colors flex items-center justify-center gap-2"
+              >
+                <Euro className="w-4 h-4" />
+                Pujar
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onScheduleBid?.(item);
+                }}
+                onMouseDown={(e) => e.preventDefault()}
+                className="w-full bg-violet-600 hover:bg-violet-700 text-white font-medium py-2 px-3 rounded-lg transition-colors flex items-center justify-center gap-2"
+              >
+                <CalendarClock className="w-4 h-4" />
+                Programar
+              </button>
+            </div>
           )}
         </div>
       </div>
