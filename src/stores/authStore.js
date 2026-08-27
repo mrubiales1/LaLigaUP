@@ -268,6 +268,17 @@ export const useAuthStore = create(
         return state.tokens?.access_token;
       },
 
+      // Android's background executor may refresh a token while the WebView
+      // is suspended. Adopt that bundle on resume so both runtimes continue
+      // from the same refresh-token generation.
+      syncTokensFromNative: async (nativeTokens) => {
+        if (!nativeTokens?.access_token && !nativeTokens?.id_token) return false;
+        const merged = { ...(get().tokens || {}), ...nativeTokens };
+        await tokenStorage.save(merged, get().user);
+        set({ tokens: merged, isAuthenticated: true });
+        return true;
+      },
+
       // Refresh access token using refresh token
       refreshToken: async () => {
         // Concurrent calls share the same in-flight promise.

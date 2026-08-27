@@ -5,6 +5,9 @@ import { useAuthStore } from '../../stores/authStore';
 import authService from '../../services/authService';
 import updateService from '../../services/updateService';
 import * as pkce from '../../utils/pkce';
+import { App as CapacitorApp } from '@capacitor/app';
+import { Browser } from '@capacitor/browser';
+import { isNativePlatform } from '../../utils/platform';
 
 // Debug logger for the interactive OAuth login. Off by default; enable by
 // building with REACT_APP_OAUTH_DEBUG=true to trace the flow in the console.
@@ -294,6 +297,7 @@ const Login = () => {
 
   const isElectronApp = typeof window !== 'undefined' && window.electronAPI !== undefined;
   const canUseElectronOAuth = isElectronApp && typeof window.electronAPI.startOAuthLogin === 'function';
+  const isNativeApp = isNativePlatform();
 
   const getWebRedirectUri = () =>
     process.env.REACT_APP_OAUTH_WEB_REDIRECT_URI ||
@@ -406,6 +410,52 @@ const Login = () => {
     });
   };
 
+  const runNativeOAuth = async ({ authorizeUrl, redirectUri, state, verifier }) => {
+    let resolveFlow;
+    let rejectFlow;
+    const completion = new Promise((resolve, reject) => {
+      resolveFlow = resolve;
+      rejectFlow = reject;
+    });
+    let finished = false;
+    let listener;
+
+    const finish = async (error) => {
+      if (finished) return;
+      finished = true;
+      clearTimeout(timeoutId);
+      await listener?.remove();
+      await Browser.close().catch(() => {});
+      if (error) rejectFlow(error); else resolveFlow();
+    };
+    const timeoutId = setTimeout(() => {
+      finish(new Error('Tiempo de espera agotado durante el inicio de sesión.'));
+    }, 3 * 60 * 1000);
+
+    try {
+      listener = await CapacitorApp.addListener('appUrlOpen', async ({ url }) => {
+        if (!url?.startsWith(redirectUri)) return;
+        try {
+          const parsed = new URL(url);
+          if (parsed.searchParams.get('state') !== state) throw new Error('State mismatch en la respuesta OAuth');
+          const oauthError = parsed.searchParams.get('error');
+          if (oauthError) throw new Error(oauthError);
+          const code = parsed.searchParams.get('code');
+          if (!code) throw new Error('No se recibió el código de autorización');
+          const tokens = await authService.exchangeCodeForTokens({ code, codeVerifier: verifier, redirectUri });
+          await login(tokens);
+          await finish();
+        } catch (error) {
+          await finish(error);
+        }
+      });
+      await Browser.open({ url: authorizeUrl, presentationStyle: 'fullscreen' });
+    } catch (error) {
+      await finish(error);
+    }
+    return completion;
+  };
+
   // One-click automated login (replaces the manual DevTools token capture).
   const handleGoogleLogin = async () => {
     setLoading(true);
@@ -424,7 +474,7 @@ const Login = () => {
       const verifier = pkce.generateVerifier();
       const challenge = await pkce.challengeFromVerifier(verifier);
       const state = pkce.randomState();
-      const redirectUri = canUseElectronOAuth
+      const redirectUri = (canUseElectronOAuth || isNativeApp)
         ? authService.AUTH_CONFIG.REDIRECT_URI
         : getWebRedirectUri();
       const authorizeUrl = authService.buildAuthorizeUrl({
@@ -435,7 +485,10 @@ const Login = () => {
       oauthLog('redirectUri:', redirectUri);
       oauthLog('authorizeUrl (open this manually to see any B2C error):', authorizeUrl);
 
-      if (canUseElectronOAuth) {
+      if (isNativeApp) {
+        oauthLog('using Android system browser login');
+        await runNativeOAuth({ authorizeUrl, redirectUri, state, verifier });
+      } else if (canUseElectronOAuth) {
         oauthLog('using Electron in-app login window');
         const result = await window.electronAPI.startOAuthLogin({ authorizeUrl, redirectUri, state });
         // Don't log the raw authorization code — report only its presence/outcome.

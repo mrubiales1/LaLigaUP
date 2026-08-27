@@ -1,0 +1,59 @@
+name: Android Build Check
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [feature/android]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Test web runtime
+        run: npm test -- --watchAll=false --runInBand
+        env:
+          CI: true
+
+      - name: Build and sync Android project
+        run: npm run android:sync
+        env:
+          CI: true
+          GENERATE_SOURCEMAP: false
+
+      - name: Compile Android tests and debug APK
+        working-directory: android
+        run: ./gradlew test assembleDebug --no-daemon
+
+      - name: Upload installable test APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: LaLigaUP-android-debug
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error

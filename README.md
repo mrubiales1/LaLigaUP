@@ -1,10 +1,10 @@
-﻿# LaLiga Fantasy App
+﻿# LaLigaUP
 
-[![Version](https://img.shields.io/badge/version-3.5.3-green.svg)](https://github.com/Externoak/LaLigaApp)
+[![Version](https://img.shields.io/badge/version-3.5.3-green.svg)](https://github.com/mrubiales1/LaLigaUP)
 [![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
 ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
-[![Platform](https://img.shields.io/badge/platform-Web%20%7C%20Electron%20-orange.svg)](#plataformas)
-![Status](https://github.com/Externoak/LaLigaApp/actions/workflows/release.yml/badge.svg)
+[![Platform](https://img.shields.io/badge/platform-Web%20%7C%20Electron%20%7C%20Android-orange.svg)](#plataformas)
+![Status](https://github.com/mrubiales1/LaLigaUP/actions/workflows/release.yml/badge.svg)
 
 **🌐 Language / Idioma:** [🇪🇸 Español](README.md) | [en English](README_EN.md)
 
@@ -18,7 +18,7 @@
 
 ### Descarga y instalación rápida
 
-1. **Descargar**: Ve a [Releases](https://github.com/Externoak/LaLigaApp/releases) y descarga la última versión
+1. **Descargar**: Ve a [Releases](https://github.com/mrubiales1/LaLigaUP/releases) y descarga la última versión para Windows o `LaLigaUP.apk` para Android
 2. **Descomprimir**: Extrae el archivo ZIP descargado
 3. **Ejecutar**: Haz doble clic en el archivo `.exe` proporcionado
 
@@ -61,7 +61,7 @@ La aplicación solo se conecta a la API oficial de LaLiga Fantasy para obtener d
 - 📊 **Dashboard en tiempo real** - Clasificaciones en vivo, estadísticas de equipos y tendencias del mercado
 - 🔍 **Búsqueda avanzada** - Búsqueda global entre jugadores, equipos y managers
 - 💰 **Gestión de mercado** - Comercio de jugadores, pujas y análisis de mercado
-- 📱 **Multiplataforma** - Web, Electron desktop
+- 📱 **Multiplataforma** - Web, Electron desktop y Android mediante Capacitor
 - 🌙 **Modo oscuro/claro** - Tema personalizable con detección de preferencia del sistema
 - 🔄 **Auto-actualizaciones** - Actualizaciones seamless de la aplicación para versiones de escritorio
 - 📈 **Tendencias del mercado** - Análisis del mercado en tiempo real y valoraciones de jugadores
@@ -127,6 +127,20 @@ npm run electron:dev    # Modo desarrollo
 npm run electron        # Build y ejecutar
 npm run build:electron  # Empaquetar para distribución
 ```
+
+### Aplicación Android
+
+Requiere Android Studio, un JDK 21 y el SDK de Android. Tras instalar las dependencias:
+
+```bash
+npm run android:sync    # Compila React y sincroniza el proyecto nativo
+npm run android:open    # Abre el proyecto en Android Studio
+npm run android:run     # Ejecuta en un emulador o dispositivo conectado
+```
+
+Las automatizaciones se guardan en el dispositivo y Android las ejecuta mediante alarmas exactas y un servicio nativo, aunque la pantalla esté apagada. En Android 12 o posterior hay que permitir **Alarmas y recordatorios** desde el menú Automate. Antes de enviar una cláusula o puja, el servicio vuelve a comprobar jugador, propietario, mercado, hora y precio máximo; una petición de resultado incierto no se repite para evitar operaciones duplicadas.
+
+El APK de prueba se publica como artefacto del workflow `Android Build Check`. Para adjuntar `LaLigaUP.apk` firmado a una release se configuran los secrets `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS` y `ANDROID_KEY_PASSWORD`.
 
 ## Docker
 
@@ -214,6 +228,9 @@ LaLigaApp/
 | `npm run dev` | Iniciar entorno de desarrollo con proxy |
 | `npm run server` | Iniciar solo el servidor proxy CORS |
 | `npm run electron:dev` | Ejecutar Electron en modo desarrollo |
+| `npm run android:sync` | Compilar y sincronizar el proyecto Android |
+| `npm run android:open` | Abrir Android Studio |
+| `npm run android:run` | Ejecutar Android en un dispositivo o emulador |
 
 ### Configuración del entorno
 

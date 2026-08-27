@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Bot, CalendarClock, Clock3, Gavel, Shield, Trash2, X } from 'lucide-react';
+import { Bot, CalendarClock, Clock3, Gavel, Shield, Trash2, X, Smartphone } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useAuthStore } from '../../stores/authStore';
 import { AUTOMATION_STATUS, useAutomationStore } from '../../stores/automationStore';
 import { formatNumberWithDots } from '../../utils/helpers';
+import nativeAutomationService from '../../services/nativeAutomationService';
 
 const STATUS_INFO = {
   pending: { label: 'Pendiente', classes: 'bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300' },
@@ -89,10 +90,16 @@ const Automate = () => {
   const cancelAction = useAutomationStore((state) => state.cancelAction);
   const clearFinished = useAutomationStore((state) => state.clearFinished);
   const [now, setNow] = useState(Date.now());
+  const [nativeCapabilities, setNativeCapabilities] = useState(null);
 
   useEffect(() => {
     const timer = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!nativeAutomationService.isAvailable()) return;
+    nativeAutomationService.getCapabilities().then(setNativeCapabilities).catch(() => {});
   }, []);
 
   const visibleActions = useMemo(() => actions
@@ -116,9 +123,36 @@ const Automate = () => {
         <p className="text-gray-500 dark:text-gray-400 mt-1">Acciones financieras programadas para esta liga.</p>
       </div>
 
-      <div className="rounded-xl border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 p-4 text-sm text-amber-800 dark:text-amber-200">
-        <strong>Importante:</strong> mantén la aplicación abierta, la sesión iniciada, el equipo despierto y conexión a Internet. La app minimizada sigue trabajando, pero una puja perdida por cierre o suspensión nunca se enviará tarde.
-      </div>
+      {nativeAutomationService.isAvailable() ? (
+        <div className={`rounded-xl border p-4 text-sm ${nativeCapabilities?.exactAlarmPermission
+          ? 'border-green-300 dark:border-green-700 bg-green-50 dark:bg-green-950/30 text-green-800 dark:text-green-200'
+          : 'border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 text-amber-800 dark:text-amber-200'}`}>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span className="inline-flex items-center gap-2">
+              <Smartphone className="w-5 h-5" />
+              {nativeCapabilities?.exactAlarmPermission
+                ? 'Automatizaciones Android activas, incluso con la pantalla apagada.'
+                : 'Android necesita permiso de alarmas exactas para ejecutar pujas a tiempo.'}
+            </span>
+            {!nativeCapabilities?.exactAlarmPermission && (
+              <button
+                type="button"
+                onClick={async () => {
+                  await nativeAutomationService.requestExactAlarmPermission();
+                  toast('Activa «Alarmas y recordatorios» y vuelve a LaLigaUP.');
+                }}
+                className="px-3 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold"
+              >
+                Conceder permiso
+              </button>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div className="rounded-xl border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 p-4 text-sm text-amber-800 dark:text-amber-200">
+          <strong>Importante:</strong> mantén la aplicación abierta, la sesión iniciada, el equipo despierto y conexión a Internet. La app minimizada sigue trabajando, pero una puja perdida por cierre o suspensión nunca se enviará tarde.
+        </div>
+      )}
 
       <section>
         <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">

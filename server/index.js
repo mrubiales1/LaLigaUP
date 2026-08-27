@@ -322,7 +322,7 @@ const buildMarketHandler = (config) => {
   };
 };
 const buildGitHubProxyHandler = (config) => {
-  const allowedHosts = new Set(['raw.githubusercontent.com', 'github.com']);
+  const allowedHosts = new Set(['raw.githubusercontent.com', 'github.com', 'api.github.com']);
   const githubHeaders = {
     Accept: 'application/json',
     'User-Agent': 'LaLigaWeb-ChangelogViewer',

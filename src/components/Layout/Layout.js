@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import {
   Home, Trophy, ShoppingCart, Users, Calendar, Search, X, Moon, Sun,
   Activity, LogOut, Shield, User, Target, RefreshCw, Clock, Bug, FileText, Edit3,
-  CircleDollarSign, Gem, Bot,
+  CircleDollarSign, Gem, Bot, Download,
 } from 'lucide-react';
 import { useAuthStore } from '../../stores/authStore';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -136,7 +136,7 @@ const SidebarUser = React.memo(function SidebarUser({ user, onRefresh }) {
   );
 });
 
-const SidebarFooter = React.memo(function SidebarFooter({ isAuthenticated, onLogout, onOpenChangelog, displayServerLink }) {
+const SidebarFooter = React.memo(function SidebarFooter({ isAuthenticated, onLogout, onOpenChangelog, displayServerLink, androidDownloadUrl }) {
   return (
     <div className="p-3 border-t border-gray-200 dark:border-dark-border space-y-2">
       {!isAuthenticated ? (
@@ -145,10 +145,18 @@ const SidebarFooter = React.memo(function SidebarFooter({ isAuthenticated, onLog
           <span className="font-medium">Volver al Login</span>
         </button>
       ) : (
-        <button onClick={onLogout} className={`${NAV_BASE} w-full hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400`}>
-          <LogOut className="w-5 h-5" />
-          <span className="font-medium">Cerrar Sesión</span>
-        </button>
+        <>
+          {androidDownloadUrl && (
+            <a href={androidDownloadUrl} target="_blank" rel="noreferrer" className={`${NAV_BASE} w-full hover:bg-green-50 dark:hover:bg-green-900/20 text-green-600 dark:text-green-400`}>
+              <Download className="w-5 h-5" />
+              <span className="font-medium">Descargar APK</span>
+            </a>
+          )}
+          <button onClick={onLogout} className={`${NAV_BASE} w-full hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400`}>
+            <LogOut className="w-5 h-5" />
+            <span className="font-medium">Cerrar Sesión</span>
+          </button>
+        </>
       )}
       <div className="mt-2 px-3 py-2 border-t border-gray-200 dark:border-gray-700">
         <div className="text-[10px] text-gray-400 dark:text-gray-500 text-center space-y-0.5 leading-tight">
@@ -479,6 +487,7 @@ const Layout = ({ children }) => {
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [isElectron, setIsElectron] = useState(false);
   const [isChangelogOpen, setIsChangelogOpen] = useState(false);
+  const [androidDownloadUrl, setAndroidDownloadUrl] = useState(null);
   const searchRef = useRef(null);
   const searchInputRef = useRef(null);
 
@@ -504,6 +513,14 @@ const Layout = ({ children }) => {
   // Detect Electron once
   useEffect(() => {
     setIsElectron(typeof window !== 'undefined' && !!window.electronAPI);
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    updateService.getAndroidDownloadUrl().then((url) => {
+      if (!cancelled) setAndroidDownloadUrl(url);
+    });
+    return () => { cancelled = true; };
   }, []);
 
   const displayServerLink = useMemo(() => {
@@ -620,7 +637,7 @@ const Layout = ({ children }) => {
           <SidebarHeader leagueName={leagueName} onChangeLeague={handleChangeLeague} />
           <SidebarNav currentPath={location.pathname} />
           <SidebarUser user={user} onRefresh={fetchUserData} />
-          <SidebarFooter isAuthenticated={isAuthenticated} onLogout={handleLogout} onOpenChangelog={openChangelog} displayServerLink={displayServerLink} />
+          <SidebarFooter isAuthenticated={isAuthenticated} onLogout={handleLogout} onOpenChangelog={openChangelog} displayServerLink={displayServerLink} androidDownloadUrl={androidDownloadUrl} />
         </div>
       </aside>
 

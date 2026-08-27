@@ -1,0 +1,15 @@
+{
+  "appId": "com.mrubiales.laligaup",
+  "appName": "LaLigaUP",
+  "webDir": "build",
+  "loggingBehavior": "debug",
+  "android": {
+    "minWebViewVersion": 60,
+    "allowMixedContent": false
+  },
+  "plugins": {
+    "CapacitorHttp": {
+      "enabled": true
+    }
+  }
+}

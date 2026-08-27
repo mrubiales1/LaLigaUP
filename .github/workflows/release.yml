@@ -136,6 +136,18 @@ jobs:
         node-version: '20'
         cache: 'npm'
 
+    - name: Setup Java for Android
+      if: steps.compare.outputs.SHOULD_BUILD == 'true'
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: '21'
+        cache: gradle
+
+    - name: Setup Android SDK
+      if: steps.compare.outputs.SHOULD_BUILD == 'true'
+      uses: android-actions/setup-android@v3
+
     - name: Install dependencies
       if: steps.compare.outputs.SHOULD_BUILD == 'true'
       run: npm ci --prefer-offline --no-audit --no-fund
@@ -205,6 +217,41 @@ jobs:
     - name: Build Electron app
       if: steps.compare.outputs.SHOULD_BUILD == 'true'
       run: npm run electron:dist
+
+    - name: Build signed Android APK
+      id: android_apk
+      if: steps.compare.outputs.SHOULD_BUILD == 'true'
+      shell: powershell
+      env:
+        ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      run: |
+        if ([string]::IsNullOrWhiteSpace($env:ANDROID_KEYSTORE_BASE64) -or
+            [string]::IsNullOrWhiteSpace($env:ANDROID_KEYSTORE_PASSWORD) -or
+            [string]::IsNullOrWhiteSpace($env:ANDROID_KEY_ALIAS) -or
+            [string]::IsNullOrWhiteSpace($env:ANDROID_KEY_PASSWORD)) {
+          echo "android_built=false" >> $env:GITHUB_OUTPUT
+          echo "::warning::Android signing secrets are not configured; the release will contain only the Windows build."
+          exit 0
+        }
+
+        npm run android:sync
+        $keystorePath = Join-Path $PWD "android\release.jks"
+        [IO.File]::WriteAllBytes($keystorePath, [Convert]::FromBase64String($env:ANDROID_KEYSTORE_BASE64))
+        @(
+          "storeFile=../release.jks"
+          "storePassword=$env:ANDROID_KEYSTORE_PASSWORD"
+          "keyAlias=$env:ANDROID_KEY_ALIAS"
+          "keyPassword=$env:ANDROID_KEY_PASSWORD"
+        ) | Set-Content -Path "android\keystore.properties" -Encoding ascii
+
+        Push-Location android
+        .\gradlew.bat assembleRelease --no-daemon
+        Pop-Location
+        Copy-Item "android\app\build\outputs\apk\release\app-release.apk" "LaLigaUP.apk"
+        echo "android_built=true" >> $env:GITHUB_OUTPUT
 
     - name: Create release zip
       if: steps.compare.outputs.SHOULD_BUILD == 'true'
@@ -292,6 +339,15 @@ jobs:
         files: LaLigaApp.zip
         draft: false
         prerelease: false
+
+    - name: Attach Android APK to Release
+      if: steps.compare.outputs.SHOULD_BUILD == 'true' && steps.android_apk.outputs.android_built == 'true'
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ steps.version.outputs.VERSION }}-${{ github.run_number }}
+        files: LaLigaUP.apk
 
     - name: Commit updated files
       if: steps.compare.outputs.SHOULD_BUILD == 'true'

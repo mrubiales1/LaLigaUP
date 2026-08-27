@@ -10,6 +10,9 @@ node_modules/
 /release
 /out
 /app/dist
+/android/keystore.properties
+/android/*.jks
+/android/*.keystore
 
 # Development
 .env.local

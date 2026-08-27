@@ -2,6 +2,7 @@
  * Update Service - Handles app version checking and auto-updates
  */
 import packageJson from '../../package.json';
+import { isNativePlatform } from '../utils/platform';
 
 class UpdateService {
     constructor() {
@@ -11,6 +12,7 @@ class UpdateService {
         const releasesBase = process.env.REACT_APP_GITHUB_RELEASES_URL || 'https://github.com/Externoak/LaLigaApp/releases/latest';
         this.releaseUrl = releasesBase;
         this.downloadUrl = `${releasesBase.replace(/\/$/, '')}/download/LaLigaApp.zip`;
+        this.androidReleaseApi = 'https://api.github.com/repos/mrubiales1/LaLigaUP/releases/latest';
 
         this.isElectron = !!(
             window.electronAPI ||
@@ -33,6 +35,27 @@ class UpdateService {
      */
     getCurrentVersion() {
         return this.currentVersion;
+    }
+
+    /** Return the APK asset only after GitHub confirms it exists. */
+    async getAndroidDownloadUrl() {
+        try {
+            if (isNativePlatform()) return null;
+            const proxyPort = process.env.REACT_APP_PROXY_PORT || '3005';
+            const proxyOrigin = process.env.NODE_ENV === 'development'
+                ? `${window.location.protocol === 'https:' ? 'https:' : 'http:'}//${window.location.hostname || 'localhost'}:${proxyPort}`
+                : window.location.origin;
+            const url = `${proxyOrigin.replace(/\/$/, '')}/api/proxy-github?url=${encodeURIComponent(this.androidReleaseApi)}`;
+            const response = await fetch(url, { headers: { Accept: 'application/json' } });
+            if (!response.ok) return null;
+            const release = await response.json();
+            const apk = Array.isArray(release.assets)
+                ? release.assets.find((asset) => asset.name === 'LaLigaUP.apk')
+                : null;
+            return apk?.browser_download_url || null;
+        } catch (_error) {
+            return null;
+        }
     }
 
     /**

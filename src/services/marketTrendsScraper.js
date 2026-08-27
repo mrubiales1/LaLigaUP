@@ -9,6 +9,7 @@
  */
 import { normalizePlayerName, normalizeTeamName, extractMainSurname } from '../utils/playerNameMatcher';
 import api from './api';
+import { isNativePlatform } from '../utils/platform';
 
 const MARKET_TRENDS_URL = 'https://www.futbolfantasy.com/analytics/laliga-fantasy/mercado';
 const MARKET_PLAYER_DETAIL_URL = `${MARKET_TRENDS_URL}/detalle`;
@@ -194,6 +195,17 @@ export const fetchMaxProfitableBid = async (futbolFantasyId) => {
 const fetchFutbolFantasyHtml = async (targetUrl) => {
   const isElectron = typeof window !== 'undefined' && window.electronAPI !== undefined;
   const isDev = process.env.NODE_ENV === 'development';
+
+  if (isNativePlatform()) {
+    const response = await fetch(targetUrl, {
+      headers: {
+        Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'es-ES,es;q=0.9',
+      },
+    });
+    if (!response.ok) throw new Error(`HTTP ${response.status} obteniendo FútbolFantasy`);
+    return response.text();
+  }
 
   const fetchViaProxy = async () => {
     const { data } = await api.get('/v4/scrape/market', {

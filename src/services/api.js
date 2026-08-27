@@ -9,9 +9,11 @@ import {
   adaptStandingResponse,
   adaptLeaguesResponse,
 } from './responseAdapters';
+import { isNativePlatform } from '../utils/platform';
 
 // Detect if we're running in Electron (using the preload bridge)
 const isElectron = window.electronAPI !== undefined;
+const isNative = isNativePlatform();
 
 
 // Detect development mode
@@ -46,6 +48,11 @@ const resolveProdBaseUrl = () => {
   if (configured) {
     return configured.replace(/\/$/, '');
   }
+
+  // A Capacitor WebView is served from https://localhost; there is no Node
+  // proxy at that origin. CapacitorHttp patches fetch and performs this
+  // cross-origin request with Android's native networking stack.
+  if (isNative) return 'https://fantasy-api.llt-services.com/api';
 
   const origin = window.location.origin;
   if (origin && origin.startsWith('http')) {
@@ -376,7 +383,9 @@ export const fantasyAPI = {
   getMatchStats: async (weekNumber) => {
     // Determine base URL based on environment
     let baseUrl;
-    if (isElectron) {
+    if (isNative) {
+      baseUrl = 'https://fantasy-api.llt-services.com';
+    } else if (isElectron) {
       baseUrl = 'http://localhost:3005';
     } else if (isDev) {
       const protocol = window.location.protocol === 'https:' ? 'https:' : 'http:';
@@ -438,8 +447,18 @@ export const fantasyAPI = {
   // utils/fetchAllTeamsData.fetchLeagueClauses (walk vía caché compartida).
 
   // Scraping de alineaciones probables desde futbolfantasy.com (siempre vía proxy)
-  scrapeTeamLineup: (teamSlug) => {
+  scrapeTeamLineup: async (teamSlug) => {
     const targetUrl = `https://www.futbolfantasy.com/laliga/equipos/${teamSlug}`;
+    if (isNative) {
+      const response = await fetch(targetUrl, {
+        headers: {
+          Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+          'Accept-Language': 'es-ES,es;q=0.9',
+        },
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status} obteniendo la alineación`);
+      return { data: { html: await response.text(), teamSlug } };
+    }
     return api.get('/v4/scrape/lineup', {
       params: { url: targetUrl, teamSlug },
       timeout: 15000,
