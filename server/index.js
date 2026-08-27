@@ -13,6 +13,7 @@ const axiosPackagePath = require.resolve('axios/package.json');
 const axios = require(path.join(path.dirname(axiosPackagePath), 'dist/node/axios.cjs'));
 const { loadConfig } = require('./config');
 const { isOriginAllowed } = require('./security');
+const { VALID_TYPES, createContentInsightsService } = require('./content-insights');
 
 // Ensure axios uses the Node http adapter even when XMLHttpRequest is present.
 axios.defaults.adapter = 'http';
@@ -452,6 +453,12 @@ const buildApp = (config) => {
   const lineupHandler = buildLineupHandler(config);
   const marketHandler = buildMarketHandler(config);
   const githubProxyHandler = buildGitHubProxyHandler(config);
+  const contentInsights = createContentInsightsService({
+    axios,
+    cacheDir: config.contentInsights.cacheDir,
+    apiKey: config.contentInsights.apiKey,
+    model: config.contentInsights.model,
+  });
 
   if (config.app.trustProxy) {
     app.set('trust proxy', config.app.trustProxy);
@@ -527,10 +534,40 @@ const buildApp = (config) => {
   app.use(config.proxy.lineupPath, limiter);
   app.use(config.proxy.marketPath, limiter);
   app.use('/api/proxy-github', limiter);
+  app.use('/api/content-insights', limiter);
 
   app.get(config.proxy.lineupPath, lineupHandler);
   app.get(config.proxy.marketPath, marketHandler);
   app.get('/api/proxy-github', githubProxyHandler);
+  app.get('/api/content-insights/:type', (req, res) => {
+    if (!VALID_TYPES.has(req.params.type)) {
+      res.status(400).json({ error: 'Tipo de contenido no válido' });
+      return;
+    }
+    const content = contentInsights.readCache(req.params.type);
+    if (!content) {
+      res.status(404).json({ error: 'Contenido todavía no generado', code: 'CONTENT_NOT_GENERATED' });
+      return;
+    }
+    res.setHeader('Cache-Control', 'private, max-age=300');
+    res.json(content);
+  });
+  app.post('/api/content-insights/:type/refresh', async (req, res) => {
+    if (!VALID_TYPES.has(req.params.type)) {
+      res.status(400).json({ error: 'Tipo de contenido no válido' });
+      return;
+    }
+    try {
+      const result = await contentInsights.refresh(req.params.type);
+      res.setHeader('Cache-Control', 'no-store');
+      res.json(result);
+    } catch (error) {
+      res.status(error.status || 502).json({
+        error: error.message || 'No se pudo actualizar el análisis',
+        code: error.code || 'CONTENT_REFRESH_FAILED',
+      });
+    }
+  });
   app.use(fantasyProxy);
 
   const resolvedStaticDir = config.app.staticDir;

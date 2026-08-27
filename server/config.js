@@ -94,6 +94,13 @@ const defaultConfig = {
     format: process.env.LOG_FORMAT || 'combined',
     level: process.env.LOG_LEVEL || 'info',
     silenceHealth: toBool(process.env.LOG_SILENCE_HEALTH, true)
+  },
+  contentInsights: {
+    apiKey: process.env.GEMINI_API_KEY || '',
+    model: process.env.GEMINI_MODEL || 'gemini-3.7-flash',
+    cacheDir: process.env.CONTENT_INSIGHTS_CACHE_DIR
+      ? path.resolve(projectRoot, process.env.CONTENT_INSIGHTS_CACHE_DIR)
+      : path.join(projectRoot, 'data', 'content-insights')
   }
 };
 

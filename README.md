@@ -170,6 +170,15 @@ Variables de entorno
 
 Backend:
 - APP_PORT - Puerto del servidor (default: 3005)
+- GEMINI_API_KEY - Clave privada usada por el servidor para analizar los vídeos de recomendaciones
+- GEMINI_MODEL - Modelo de Gemini (default: gemini-3.7-flash)
+- CONTENT_INSIGHTS_CACHE_DIR - Directorio de caché de los análisis
+
+Recomendaciones de YouTube:
+
+- La clave de Gemini solo se configura en el servidor o como secret de GitHub; nunca se incluye en React ni en el APK.
+- Para la actualización automática de Android, crea el secret de Actions `GEMINI_API_KEY` y ejecuta una vez el workflow `Actualizar recomendaciones de YouTube`. Después se ejecutará diariamente y publicará únicamente los JSON sanitizados en la rama `content-data`.
+- En local, añade `GEMINI_API_KEY` a `.env`, inicia `npm run dev` y usa el botón `Actualizar último vídeo`.
 
 ## 🏗️ Estructura del proyecto
 

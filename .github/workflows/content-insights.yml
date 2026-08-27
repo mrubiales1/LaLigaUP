@@ -1,0 +1,59 @@
+name: Actualizar recomendaciones de YouTube
+
+on:
+  schedule:
+    - cron: '17 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: content-insights
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Recuperar la caché publicada
+        shell: bash
+        run: |
+          mkdir -p generated-content
+          git clone --depth 1 --branch content-data "https://github.com/${GITHUB_REPOSITORY}.git" previous-content || true
+          cp previous-content/*.json generated-content/ 2>/dev/null || true
+
+      - name: Analizar los últimos vídeos
+        run: node scripts/update-content-insights.js
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CONTENT_INSIGHTS_OUTPUT_DIR: generated-content
+
+      - name: Publicar JSON para escritorio y Android
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -f previous-content/recommendations.json ] && [ -f previous-content/messi.json ] \
+            && cmp -s previous-content/recommendations.json generated-content/recommendations.json \
+            && cmp -s previous-content/messi.json generated-content/messi.json; then
+            echo "No hay contenido nuevo que publicar"
+            exit 0
+          fi
+          git -C generated-content init -b content-data
+          git -C generated-content config user.name "github-actions[bot]"
+          git -C generated-content config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C generated-content add recommendations.json messi.json
+          git -C generated-content commit -m "content: actualizar recomendaciones de YouTube"
+          git -C generated-content remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git -C generated-content push --force origin content-data
