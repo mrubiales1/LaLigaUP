@@ -15,6 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
 
 final class FantasyAutomationExecutor {
     private static final String API = "https://fantasy-api.llt-services.com/api";
@@ -156,7 +157,11 @@ final class FantasyAutomationExecutor {
             JSONObject refreshed = new JSONObject(response.body);
             String access = refreshed.optString("id_token", refreshed.optString("access_token"));
             if (access.isEmpty()) throw new AuthException("La renovación no devolvió un token válido.");
-            for (String key : refreshed.keySet()) put(tokens, key, refreshed.opt(key));
+            Iterator<String> refreshedKeys = refreshed.keys();
+            while (refreshedKeys.hasNext()) {
+                String key = refreshedKeys.next();
+                put(tokens, key, refreshed.opt(key));
+            }
             put(tokens, "access_token", access);
             if (!refreshed.has("refresh_token")) put(tokens, "refresh_token", refreshToken);
             long expiresIn = refreshed.optLong("id_token_expires_in", refreshed.optLong("expires_in", 86400));

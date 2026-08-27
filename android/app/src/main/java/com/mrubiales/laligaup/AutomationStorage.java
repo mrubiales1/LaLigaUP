@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -54,7 +55,9 @@ final class AutomationStorage {
         for (int i = 0; i < actions.length(); i++) {
             JSONObject action = actions.optJSONObject(i);
             if (action == null || !id.equals(action.optString("id"))) continue;
-            for (String key : updates.keySet()) {
+            Iterator<String> updateKeys = updates.keys();
+            while (updateKeys.hasNext()) {
+                String key = updateKeys.next();
                 try { action.put(key, updates.get(key)); } catch (Exception ignored) {}
             }
             break;
