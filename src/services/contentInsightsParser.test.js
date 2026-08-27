@@ -1,4 +1,4 @@
-const { parseYouTubeFeed, selectLatestVideo, normalizeAnalysis } = require('../../server/content-insights');
+const { parseYouTubeFeed, selectLatestVideo, normalizeAnalysis, createContentInsightsService } = require('../../server/content-insights');
 
 const FEED = `<?xml version="1.0"?><feed>
   <entry><yt:videoId>new-buy</yt:videoId><title>COMPRAS y VENTAS FANTASY tras la JORNADA 3</title><published>2026-08-27T09:00:00Z</published></entry>
@@ -20,5 +20,18 @@ describe('content insights ingestion', () => {
     }, 'messi', { id: 'new-xi', url: 'https://www.youtube.com/watch?v=new-xi' });
     expect(content.sections[0].players[0]).toEqual(expect.objectContaining({ name: 'Ante Budimir', timestampSeconds: 1108 }));
     expect(content.matchday).toBe(3);
+  });
+
+  test('envía la resolución de vídeo con el campo admitido por Interactions API', async () => {
+    const axios = {
+      post: jest.fn().mockResolvedValue({
+        data: { steps: [{ content: [{ text: JSON.stringify({ summary: 'ok', matchday: 3, sections: [] }) }] }] },
+      }),
+    };
+    const service = createContentInsightsService({ axios, apiKey: 'test-key' });
+    await service.analyze('messi', { id: 'video', title: 'Vídeo', url: 'https://www.youtube.com/watch?v=video' });
+    const payload = axios.post.mock.calls[0][1];
+    expect(payload.input[0]).toEqual(expect.objectContaining({ resolution: 'low' }));
+    expect(payload.input[0]).not.toHaveProperty('media_resolution');
   });
 });
