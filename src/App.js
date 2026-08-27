@@ -28,6 +28,8 @@ const MarketTrends = React.lazy(() => import(/* webpackChunkName: "market-trends
 const AlertManager = React.lazy(() => import(/* webpackChunkName: "alerts" */ './components/Alerts/AlertManager'));
 const Settings = React.lazy(() => import(/* webpackChunkName: "settings" */ './components/Settings/Settings'));
 const OncesProbles = React.lazy(() => import(/* webpackChunkName: "onces" */ './components/OncesProbles/OncesProbles'));
+const Recommendations = React.lazy(() => import(/* webpackChunkName: "recommendations" */ './components/ContentInsights/Recommendations'));
+const MessiLineup = React.lazy(() => import(/* webpackChunkName: "messi-lineup" */ './components/ContentInsights/MessiLineup'));
 
 function App() {
   const initializeAuth = useAuthStore((state) => state.initializeAuth);
@@ -105,6 +107,8 @@ function AppRoutes() {
         <Route path="/salaries" element={<Salaries />} />
         <Route path="/bargains" element={<Bargains />} />
         <Route path="/automate" element={<Automate />} />
+        <Route path="/recommendations" element={<Recommendations />} />
+        <Route path="/messi-lineup" element={<MessiLineup />} />
         <Route path="/alerts" element={<AlertManager />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/onces-probables" element={<OncesProbles />} />

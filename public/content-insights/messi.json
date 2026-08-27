@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "type": "messi",
+  "video": {
+    "id": "wo5kcbMzcwY",
+    "title": "Los MEJORES JUGADORES para la JORNADA 2 de LA LIGA FANTASY 26/27",
+    "url": "https://www.youtube.com/watch?v=wo5kcbMzcwY",
+    "publishedAt": "2026-08-19T15:45:24Z",
+    "thumbnailUrl": "https://i.ytimg.com/vi/wo5kcbMzcwY/hqdefault.jpg"
+  },
+  "generatedAt": "2026-08-27T00:00:00Z",
+  "matchday": 2,
+  "summary": "Jugadores destacados y recomendados para la jornada 2, agrupados por demarcación y contexto.",
+  "sections": [
+    {
+      "id": "forwards",
+      "title": "Delanteros y puntas recomendados",
+      "subtitle": "Opciones ofensivas y candidatos a capitán.",
+      "category": "forward",
+      "minBudgetMillions": -1,
+      "maxBudgetMillions": -1,
+      "players": [
+        { "name": "Ante Budimir", "team": "CA Osasuna", "rationale": "Una de las grandes apuestas jugando en casa ante el Levante.", "recommendation": "Alinear", "timestampSeconds": 1108 },
+        { "name": "Nicolas Pépé", "team": "Villarreal CF", "rationale": "En racha goleadora y con potencial al contraataque.", "recommendation": "Alinear", "timestampSeconds": 1096 },
+        { "name": "Roberto Fernández", "team": "RCD Espanyol", "rationale": "Jugador revelación de la primera jornada.", "recommendation": "Alinear", "timestampSeconds": 994 },
+        { "name": "Raúl Moro", "team": "Real Valladolid", "rationale": "Opción de capitán con potencial para superar los diez puntos.", "recommendation": "Capitán", "timestampSeconds": 590 }
+      ],
+      "notes": []
+    },
+    {
+      "id": "midfielders",
+      "title": "Centrocampistas y creadores",
+      "subtitle": "Perfiles para liderar o completar la medular.",
+      "category": "midfielder",
+      "minBudgetMillions": -1,
+      "maxBudgetMillions": -1,
+      "players": [
+        { "name": "Fermín López", "team": "FC Barcelona", "rationale": "Muy recomendado por revalorización y potencial ante el Elche.", "recommendation": "Alinear", "timestampSeconds": 845 },
+        { "name": "Isco Alarcón", "team": "Real Betis", "rationale": "Oportunidad de compra cercana a su valor antes de la jornada.", "recommendation": "Comprar y alinear", "timestampSeconds": 329 },
+        { "name": "Jon Guridi", "team": "Deportivo Alavés", "rationale": "Asumirá el rol de lanzador de penaltis.", "recommendation": "Alinear", "timestampSeconds": 666 },
+        { "name": "Facundo Buonanotte", "team": "Elche CF", "rationale": "Apuesta de rendimiento a bajo coste.", "recommendation": "Alinear", "timestampSeconds": 645 },
+        { "name": "Bernardo Silva", "team": "Real Madrid", "rationale": "Opción de capitán de garantías frente al Espanyol.", "recommendation": "Capitán", "timestampSeconds": 1494 },
+        { "name": "Marc Bernal", "team": "FC Barcelona", "rationale": "Opción joven que parte como titular ante el Elche.", "recommendation": "Alinear", "timestampSeconds": 1714 }
+      ],
+      "notes": []
+    },
+    {
+      "id": "defenders",
+      "title": "Defensas y chollos en la zaga",
+      "subtitle": "Laterales, titulares y parches económicos.",
+      "category": "defender",
+      "minBudgetMillions": -1,
+      "maxBudgetMillions": -1,
+      "players": [
+        { "name": "Andrei Rațiu", "team": "Rayo Vallecano", "rationale": "Bajo valor de mercado y potencial ofensivo por banda.", "recommendation": "Alinear", "timestampSeconds": 1650 },
+        { "name": "Gerard Martín", "team": "FC Barcelona", "rationale": "Parche ideal con posibilidad de beneficio inmediato.", "recommendation": "Alinear", "timestampSeconds": 621 },
+        { "name": "Héctor Bellerín", "team": "Real Betis", "rationale": "Recupera la titularidad a bajo coste.", "recommendation": "Alinear", "timestampSeconds": 439 },
+        { "name": "Aitor Paredes", "team": "Athletic Club", "rationale": "Titular confirmado para el centro de la defensa.", "recommendation": "Alinear", "timestampSeconds": 933 }
+      ],
+      "notes": []
+    },
+    {
+      "id": "goalkeepers",
+      "title": "Portería",
+      "subtitle": "Guardametas con un contexto favorable para puntuar.",
+      "category": "goalkeeper",
+      "minBudgetMillions": -1,
+      "maxBudgetMillions": -1,
+      "players": [
+        { "name": "Marko Dmitrović", "team": "RCD Espanyol", "rationale": "Apuesta por el alto volumen de paradas previsto.", "recommendation": "Alinear", "timestampSeconds": 1644 },
+        { "name": "Joan García", "team": "RCD Espanyol", "rationale": "Alto rendimiento en intervenciones fuera de casa.", "recommendation": "Alinear", "timestampSeconds": 476 },
+        { "name": "Álvaro Valles", "team": "Real Betis", "rationale": "Opciones de dejar la portería a cero actuando en casa.", "recommendation": "Alinear", "timestampSeconds": 762 }
+      ],
+      "notes": []
+    }
+  ]
+}

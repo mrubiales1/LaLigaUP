@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "type": "recommendations",
+  "video": {
+    "id": "597L1nlv7jM",
+    "title": "COMPRAS y VENTAS FANTASY para LA LIGA FANTASY 26/27 tras la JORNADA 2",
+    "url": "https://www.youtube.com/watch?v=597L1nlv7jM",
+    "publishedAt": "2026-08-24T13:29:49Z",
+    "thumbnailUrl": "https://i.ytimg.com/vi/597L1nlv7jM/hqdefault.jpg"
+  },
+  "generatedAt": "2026-08-27T00:00:00Z",
+  "matchday": 2,
+  "summary": "Compras, ventas y jugadores a vigilar tras la jornada 2, con distintos límites de sobrepuja según la confianza del creador.",
+  "sections": [
+    {
+      "id": "priority",
+      "title": "Objetivos prioritarios",
+      "subtitle": "Jugadores en estado de forma diferencial o con un nivel de expectación muy elevado.",
+      "category": "priority",
+      "minBudgetMillions": 12,
+      "maxBudgetMillions": 14,
+      "players": [
+        { "name": "Fermín López", "team": "FC Barcelona", "rationale": "Gran actuación ante el Elche.", "recommendation": "Compra prioritaria", "timestampSeconds": 301 },
+        { "name": "Raphinha", "team": "FC Barcelona", "rationale": "Gran actuación ante el Elche.", "recommendation": "Compra prioritaria", "timestampSeconds": 301 },
+        { "name": "Jude Bellingham", "team": "Real Madrid", "rationale": "Protagonista en el apartado ofensivo blanco.", "recommendation": "Compra prioritaria", "timestampSeconds": 308 },
+        { "name": "Arda Güler", "team": "Real Madrid", "rationale": "Protagonista en el apartado ofensivo blanco.", "recommendation": "Compra prioritaria", "timestampSeconds": 308 }
+      ],
+      "notes": []
+    },
+    {
+      "id": "top-buys",
+      "title": "Top compras",
+      "subtitle": "Las compras favoritas del vídeo por debajo del límite indicado.",
+      "category": "buy",
+      "minBudgetMillions": 8,
+      "maxBudgetMillions": 10,
+      "players": [
+        { "name": "Kang-In Lee", "team": "", "rationale": "Incluido entre las mejores compras de la semana.", "recommendation": "Comprar", "timestampSeconds": 480 },
+        { "name": "Eric García", "team": "FC Barcelona", "rationale": "Asentado en el lateral.", "recommendation": "Comprar", "timestampSeconds": 492 },
+        { "name": "Pablo Fornals", "team": "Real Betis", "rationale": "Perfil recomendado dentro del rango alto de compra.", "recommendation": "Comprar", "timestampSeconds": 524 },
+        { "name": "Antony", "team": "Real Betis", "rationale": "Perfil recomendado dentro del rango alto de compra.", "recommendation": "Comprar", "timestampSeconds": 524 },
+        { "name": "Dean Huijsen", "team": "Real Madrid", "rationale": "Defensa recomendado del Real Madrid.", "recommendation": "Comprar", "timestampSeconds": 548 },
+        { "name": "Nicolas Pépé", "team": "Villarreal", "rationale": "Atacante recomendado del Villarreal.", "recommendation": "Comprar", "timestampSeconds": 554 }
+      ],
+      "notes": []
+    },
+    {
+      "id": "good-buys",
+      "title": "Buenas compras",
+      "subtitle": "Alternativas interesantes con una sobrepuja más contenida.",
+      "category": "buy",
+      "minBudgetMillions": 5,
+      "maxBudgetMillions": 7,
+      "players": [
+        { "name": "Giuliano Simeone", "team": "Atlético de Madrid", "rationale": "Buena opción dentro del segundo escalón de compras.", "recommendation": "Comprar", "timestampSeconds": 828 },
+        { "name": "Pablo Barrios", "team": "Atlético de Madrid", "rationale": "Buena opción dentro del segundo escalón de compras.", "recommendation": "Comprar", "timestampSeconds": 828 },
+        { "name": "Álex Baena", "team": "", "rationale": "Compra recomendada con límite moderado.", "recommendation": "Comprar", "timestampSeconds": 837 },
+        { "name": "Cucho Hernández", "team": "Real Betis", "rationale": "Compra recomendada con límite moderado.", "recommendation": "Comprar", "timestampSeconds": 867 },
+        { "name": "David Soria", "team": "Getafe", "rationale": "Portero recomendado de este bloque.", "recommendation": "Comprar", "timestampSeconds": 881 }
+      ],
+      "notes": []
+    },
+    {
+      "id": "mandatory-sales",
+      "title": "Ventas fantasy obligatorias",
+      "subtitle": "Perfiles cuya pérdida de valor, suplencia, lesión o rendimiento no justifican mantener su precio.",
+      "category": "sell",
+      "minBudgetMillions": -1,
+      "maxBudgetMillions": -1,
+      "players": [
+        { "name": "Oihan Sancet", "team": "Athletic Club", "rationale": "Incluido entre las ventas obligatorias del Athletic.", "recommendation": "Vender", "timestampSeconds": 1525 },
+        { "name": "Nico Williams", "team": "Athletic Club", "rationale": "Incluido entre las ventas obligatorias del Athletic.", "recommendation": "Vender", "timestampSeconds": 1525 },
+        { "name": "Julián Álvarez", "team": "Atlético de Madrid", "rationale": "Incluido entre las ventas obligatorias del Atlético.", "recommendation": "Vender", "timestampSeconds": 1580 },
+        { "name": "Gavi", "team": "FC Barcelona", "rationale": "Su lesión motiva la recomendación de venta.", "recommendation": "Vender", "timestampSeconds": 1605 },
+        { "name": "Dani Olmo", "team": "FC Barcelona", "rationale": "Incluido entre las ventas obligatorias del Barcelona.", "recommendation": "Vender", "timestampSeconds": 1605 }
+      ],
+      "notes": []
+    },
+    {
+      "id": "trend-changes",
+      "title": "Cambios de tendencia",
+      "subtitle": "Jugadores a vigilar por una posible revalorización.",
+      "category": "watch",
+      "minBudgetMillions": -1,
+      "maxBudgetMillions": -1,
+      "players": [
+        { "name": "Marc Pubill", "team": "", "rationale": "Su actuación en la jornada 2 lo coloca como opción de revalorización.", "recommendation": "Vigilar", "timestampSeconds": 2312 },
+        { "name": "Ez Abde", "team": "Real Betis", "rationale": "Atención a su retorno tras lesión de cara a la jornada 3.", "recommendation": "Vigilar", "timestampSeconds": 2398 },
+        { "name": "Pathe Ciss", "team": "Rayo Vallecano", "rationale": "Precaución por una posible salida del club.", "recommendation": "Precaución", "timestampSeconds": 2496 }
+      ],
+      "notes": []
+    }
+  ]
+}
