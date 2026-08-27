@@ -230,7 +230,7 @@ const createContentInsightsService = ({ axios, cacheDir, apiKey, model = 'gemini
     const response = await axios.post(GEMINI_ENDPOINT, {
       model,
       input: [
-        { type: 'video', uri: video.url, media_resolution: 'low' },
+        { type: 'video', uri: video.url, resolution: 'low' },
         { type: 'text', text: buildPrompt(type, video) },
       ],
       response_format: { type: 'text', mime_type: 'application/json', schema: responseSchema },

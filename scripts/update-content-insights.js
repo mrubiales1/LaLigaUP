@@ -22,6 +22,7 @@ const run = async () => {
 };
 
 run().catch((error) => {
-  console.error(error.message || error);
+  const apiError = error.response?.data;
+  console.error(apiError ? JSON.stringify(apiError, null, 2) : (error.message || error));
   process.exitCode = 1;
 });
