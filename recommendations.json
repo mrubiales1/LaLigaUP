@@ -1,0 +1,1174 @@
+{
+  "schemaVersion": 1,
+  "type": "recommendations",
+  "video": {
+    "id": "597L1nlv7jM",
+    "title": "COMPRAS y VENTAS FANTASY para LA LIGA FANTASY 26/27 tras la JORNADA 2",
+    "url": "https://www.youtube.com/watch?v=597L1nlv7jM",
+    "publishedAt": "2026-08-24T13:29:49+00:00",
+    "updatedAt": "2026-08-25T07:23:34+00:00",
+    "thumbnailUrl": "https://i.ytimg.com/vi/597L1nlv7jM/hqdefault.jpg"
+  },
+  "generatedAt": "2026-08-27T16:19:06.518Z",
+  "matchday": 2,
+  "summary": "Análisis exhaustivo del mercado de LaLiga Fantasy tras la Jornada 2. Se clasifican las mejores compras por rangos de sobrepuja económica, se señalan las ventas obligatorias para evitar devaluaciones y liberar presupuesto, se analizan futbolistas en situación de duda y se destacan cambios de tendencia inminentes de cara a la Jornada 3.",
+  "sections": [
+    {
+      "id": "objetivos-prioritarios",
+      "title": "Objetivos Prioritarios",
+      "subtitle": "Jugadores determinantes con fuerte subida de valor",
+      "category": "compra",
+      "minBudgetMillions": 12,
+      "maxBudgetMillions": 14,
+      "players": [
+        {
+          "name": "Fermín",
+          "team": "FC Barcelona",
+          "rationale": "Brillante actuación ante el Elche con gran puntuación fantasy y una proyección de revalorización muy alta.",
+          "recommendation": "Comprar con sobrepuja de hasta 12-14M",
+          "timestampSeconds": 296
+        },
+        {
+          "name": "Raphinha",
+          "team": "FC Barcelona",
+          "rationale": "Actuación estelar de 24 puntos fantasy; el hype es máximo y seguirá subiendo con fuerza.",
+          "recommendation": "Comprar prioritariamente",
+          "timestampSeconds": 302
+        },
+        {
+          "name": "Bellingham",
+          "team": "Real Madrid",
+          "rationale": "Gran rendimiento en la jornada 2 con 13 puntos fantasy y protagonismo ofensivo garantizado.",
+          "recommendation": "Fichar como pilar fantasy",
+          "timestampSeconds": 307
+        },
+        {
+          "name": "Arda Güler",
+          "team": "Real Madrid",
+          "rationale": "Protagonista a balón parado y en el primer gol blanco, con enorme margen de crecimiento económico.",
+          "recommendation": "Comprar con sobrepuja alta",
+          "timestampSeconds": 311
+        }
+      ],
+      "notes": [
+        {
+          "text": "Son los futbolistas con mayor demanda y rentabilidad inmediata en puntos y dinero.",
+          "timestampSeconds": 235
+        }
+      ]
+    },
+    {
+      "id": "top-compras",
+      "title": "Top Compras",
+      "subtitle": "Jugadores de alto rendimiento con inversión moderada-alta",
+      "category": "compra",
+      "minBudgetMillions": 8,
+      "maxBudgetMillions": 10,
+      "players": [
+        {
+          "name": "Kang-In Lee",
+          "team": "Atlético de Madrid",
+          "rationale": "Muy codiciado en el mercado fantasy tras sumar 16 puntos en dos jornadas.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 478
+        },
+        {
+          "name": "Eric García",
+          "team": "FC Barcelona",
+          "rationale": "Asentado en el lateral derecho y puntuando 11 en su debut de temporada.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 494
+        },
+        {
+          "name": "Adeyemi",
+          "team": "FC Barcelona",
+          "rationale": "Gol y 11 puntos en su debut, con fuerte subida de valor en el mercado.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 500
+        },
+        {
+          "name": "Gordon",
+          "team": "FC Barcelona",
+          "rationale": "Doble asistencia en pocos minutos ante el Elche; su valor se disparará en los próximos días.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 505
+        },
+        {
+          "name": "Pablo Fornals",
+          "team": "Real Betis",
+          "rationale": "Gran nivel en el centro del campo bético sumando 10 puntos en la jornada 2.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 523
+        },
+        {
+          "name": "Antony",
+          "team": "Real Betis",
+          "rationale": "Actuación positiva con 9 puntos fantasy y buena generación de juego ofensivo.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 526
+        },
+        {
+          "name": "Aubameyang",
+          "team": "Sevilla",
+          "rationale": "10 puntos en su único partido disputado y con un calendario favorable en casa.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 529
+        },
+        {
+          "name": "Huijsen",
+          "team": "Real Madrid",
+          "rationale": "Titular en la zaga blanca con buena solidez defensiva.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 543
+        },
+        {
+          "name": "Konaté",
+          "team": "Real Madrid",
+          "rationale": "Gran rendimiento como central titular merengue sumando 7 puntos.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 548
+        },
+        {
+          "name": "Mikautadze",
+          "team": "Villarreal",
+          "rationale": "Acumula 23 puntos en dos jornadas y ratifica su condición de delantero top.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 553
+        },
+        {
+          "name": "Nicolas Pépé",
+          "team": "Villarreal",
+          "rationale": "Desequilibrio continuo en ataque y crecimiento económico constante pese a la bajada de puntos en J2.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 562
+        }
+      ],
+      "notes": [
+        {
+          "text": "Se recomienda no sobrepujar más de 8-10 millones para poder rentabilizar la inversión en menos de una semana.",
+          "timestampSeconds": 415
+        }
+      ]
+    },
+    {
+      "id": "estrellas-no-blindar",
+      "title": "Estrellas Fantasy - No Subir Cláusula",
+      "subtitle": "Grandes nombres con rendimiento inferior al coste económico",
+      "category": "especulación",
+      "minBudgetMillions": -1,
+      "maxBudgetMillions": -1,
+      "players": [
+        {
+          "name": "Lamine Yamal",
+          "team": "FC Barcelona",
+          "rationale": "Puntuación discreta de 5 puntos y menor ritmo de juego que sus compañeros de ataque; su altísimo valor frena la rentabilidad.",
+          "recommendation": "Comprar a VM o vender ante ofertas altas, sin blindar cláusula",
+          "timestampSeconds": 612
+        },
+        {
+          "name": "Kylian Mbappé",
+          "team": "Real Madrid",
+          "rationale": "Discreto estreno de 5 puntos sin puntería; retiene demasiado presupuesto que debilita el resto de la plantilla inicial.",
+          "recommendation": "No blindar cláusula y especular a valor de mercado",
+          "timestampSeconds": 648
+        }
+      ],
+      "notes": [
+        {
+          "text": "No es rentable comprometer todo el presupuesto en una sola estrella si obliga a mantener jugadores deficientes en el resto del once.",
+          "timestampSeconds": 714
+        }
+      ]
+    },
+    {
+      "id": "buenas-compras",
+      "title": "Buenas Compras",
+      "subtitle": "Opciones sólidas para reforzar la plantilla con sobrepuja media",
+      "category": "compra",
+      "minBudgetMillions": 5,
+      "maxBudgetMillions": 7,
+      "players": [
+        {
+          "name": "Giuliano Simeone",
+          "team": "Atlético de Madrid",
+          "rationale": "12 puntos en la jornada 2 y cambio de tendencia alcista en su valor.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 826
+        },
+        {
+          "name": "Álex Baena",
+          "team": "Atlético de Madrid",
+          "rationale": "Repartió asistencia y sigue demostrando gran dinamismo ofensivo.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 836
+        },
+        {
+          "name": "Pablo Barrios",
+          "team": "Atlético de Madrid",
+          "rationale": "Pese a ser suplente en J2, acumula 13 puntos y mantiene buen tirón de mercado.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 846
+        },
+        {
+          "name": "Gerard Martín",
+          "team": "FC Barcelona",
+          "rationale": "Puntuó 10 en su estreno liguero y aumentará sensiblemente su precio.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 855
+        },
+        {
+          "name": "Cucho Hernández",
+          "team": "Real Betis",
+          "rationale": "Asistente en el triunfo del Betis y sumando 10 puntos fantasy.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 867
+        },
+        {
+          "name": "Marcos Alonso",
+          "team": "Celta de Vigo",
+          "rationale": "12 puntos fantasy gracias a su gran despliegue estadístico defensivo y ofensivo.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 872
+        },
+        {
+          "name": "David Soria",
+          "team": "Getafe",
+          "rationale": "15 puntos con penalti parado y portería a cero ante el Racing.",
+          "recommendation": "Comprar",
+          "timestampSeconds": 877
+        }
+      ],
+      "notes": [
+        {
+          "text": "El margen recomendado de sobrepuja se sitúa entre 5 y 7 millones para asegurar beneficio.",
+          "timestampSeconds": 770
+        }
+      ]
+    },
+    {
+      "id": "compras-valor-mercado",
+      "title": "Compras a Valor de Mercado",
+      "subtitle": "Jugadores rentables y en forma para fichar sin sobrepujar en exceso",
+      "category": "compra",
+      "minBudgetMillions": 0,
+      "maxBudgetMillions": 4,
+      "players": [
+        {
+          "name": "Tenaglia",
+          "team": "Deportivo Alavés",
+          "rationale": "Acumula 21 puntos fantasy en dos partidos; zaguero fiable.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 970
+        },
+        {
+          "name": "Sivera",
+          "team": "Deportivo Alavés",
+          "rationale": "18 puntos en dos jornadas, guardameta muy rentable.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 975
+        },
+        {
+          "name": "Hancko",
+          "team": "Atlético de Madrid",
+          "rationale": "Defensa seguro con 15 puntos acumulados.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 980
+        },
+        {
+          "name": "Koke",
+          "team": "Atlético de Madrid",
+          "rationale": "Pieza clave del mediocampo colchonero con 14 puntos.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 986
+        },
+        {
+          "name": "Joan García",
+          "team": "FC Barcelona",
+          "rationale": "Portería a cero y 12 puntos; mejor portero fantasy del momento.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 993
+        },
+        {
+          "name": "Marc Bartra",
+          "team": "Real Betis",
+          "rationale": "10 puntos y gol, aunque con rotación por semana intersemanal.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1000
+        },
+        {
+          "name": "Álvaro Valles",
+          "team": "Real Betis",
+          "rationale": "14 puntos en su debut liguero con gran actuación bajo palos.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1005
+        },
+        {
+          "name": "Fran García",
+          "team": "Real Betis",
+          "rationale": "7 puntos y titular en el lateral izquierdo.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1010
+        },
+        {
+          "name": "Natan",
+          "team": "Real Betis",
+          "rationale": "8 puntos en el triunfo bético, central de buen nivel.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1015
+        },
+        {
+          "name": "Roberto",
+          "team": "RCD Espanyol",
+          "rationale": "Acumula 19 puntos en dos jornadas de delantero titular.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1020
+        },
+        {
+          "name": "Dmitrovic",
+          "team": "RCD Espanyol",
+          "rationale": "Gran actuación con paradas de mérito ante el Real Madrid.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1025
+        },
+        {
+          "name": "Enes Ünal",
+          "team": "Getafe",
+          "rationale": "9 puntos en su estreno con el Getafe.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1033
+        },
+        {
+          "name": "Mojica",
+          "team": "Getafe",
+          "rationale": "9 puntos y titular indiscutible en banda.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1038
+        },
+        {
+          "name": "Zaid Romero",
+          "team": "Getafe",
+          "rationale": "13 puntos acumulados y consolidado en el eje de la zaga.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1043
+        },
+        {
+          "name": "Iñigo Vicente",
+          "team": "Racing de Santander",
+          "rationale": "Regularidad de 6 puntos por jornada y referencia ofensiva.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1048
+        },
+        {
+          "name": "Agirrezabala",
+          "team": "Racing de Santander",
+          "rationale": "Guardameta muy barato con 12 puntos en dos fechas.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1057
+        },
+        {
+          "name": "Sergio Canales",
+          "team": "Racing de Santander",
+          "rationale": "Suma 9 puntos fantasy con buen rendimiento regular.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1064
+        },
+        {
+          "name": "Pathé Ciss",
+          "team": "Rayo Vallecano",
+          "rationale": "12 puntos en dos partidos y buen despliegue físico.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1069
+        },
+        {
+          "name": "De Frutos",
+          "team": "Rayo Vallecano",
+          "rationale": "9 puntos en J2 y 12 acumulados en ataque rayista.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1076
+        },
+        {
+          "name": "Carlos Espí",
+          "team": "Real Madrid",
+          "rationale": "8 puntos en su debut liguero aprovechando minutos.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1085
+        },
+        {
+          "name": "Courtois",
+          "team": "Real Madrid",
+          "rationale": "Portero indiscutible y seguro a valor razonable.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1096
+        },
+        {
+          "name": "Take Kubo",
+          "team": "Real Sociedad",
+          "rationale": "La afición fantasy confía en su desequilibrio en próximas jornadas.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1101
+        },
+        {
+          "name": "Oso",
+          "team": "Sevilla",
+          "rationale": "17 puntos en J2 con gol y asistencia.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1106
+        },
+        {
+          "name": "Vlachodimos",
+          "team": "Sevilla",
+          "rationale": "10 puntos y portería imbatida frente al Athletic.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1113
+        },
+        {
+          "name": "Guido Rodríguez",
+          "team": "Valencia",
+          "rationale": "10 puntos en su debut, aportando solidez defensiva.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1117
+        },
+        {
+          "name": "Dimitrievski",
+          "team": "Valencia",
+          "rationale": "9 puntos con portería a cero ante el Celta.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1122
+        },
+        {
+          "name": "Mariano",
+          "team": "Deportivo Alavés",
+          "rationale": "Acumula 25 puntos en 2 jornadas; debe ficharse a VM sin sobrepujar 5M de más.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1183
+        },
+        {
+          "name": "Toni Martínez",
+          "team": "Deportivo Alavés",
+          "rationale": "12 puntos acumulados y valor en constante subida.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1198
+        },
+        {
+          "name": "Ángel Pérez",
+          "team": "Deportivo Alavés",
+          "rationale": "12 puntos en dos fechas, opción económica para la delantera.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1203
+        },
+        {
+          "name": "Mikel Rodríguez",
+          "team": "Deportivo Alavés",
+          "rationale": "14 puntos fantasy y rol importante en la medular.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1208
+        },
+        {
+          "name": "Peio Canales",
+          "team": "Athletic Club",
+          "rationale": "7 puntos y gran despliegue adueñándose de la medular.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1213
+        },
+        {
+          "name": "Yeray",
+          "team": "Athletic Club",
+          "rationale": "10 puntos y gol de cabeza ante el Sevilla.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1223
+        },
+        {
+          "name": "Paredes",
+          "team": "Athletic Club",
+          "rationale": "10 puntos y asistencia en jugada ensayada.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1225
+        },
+        {
+          "name": "Marc Bernal",
+          "team": "FC Barcelona",
+          "rationale": "5 puntos en su estreno; opción joven a bajo precio.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1229
+        },
+        {
+          "name": "Rodrigo Riquelme",
+          "team": "Real Betis",
+          "rationale": "13 puntos con gol de la victoria para los verdiblancos.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1238
+        },
+        {
+          "name": "Bellerín",
+          "team": "Real Betis",
+          "rationale": "Titular solvente en el lateral diestro.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1246
+        },
+        {
+          "name": "Javi Galán",
+          "team": "Celta de Vigo",
+          "rationale": "6 puntos y titularidad asegurada en el lateral zurdo.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1251
+        },
+        {
+          "name": "Javi Rodríguez",
+          "team": "Celta de Vigo",
+          "rationale": "9 puntos fantasy en su debut liguero.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1256
+        },
+        {
+          "name": "Febas",
+          "team": "Celta de Vigo",
+          "rationale": "7 puntos y buen trabajo de recuperación y distribución.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1260
+        },
+        {
+          "name": "Mario Soriano",
+          "team": "Deportivo",
+          "rationale": "6 puntos y tendencia al alza para la jornada 3.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1263
+        },
+        {
+          "name": "Bright Ede",
+          "team": "Deportivo",
+          "rationale": "Defensa rentable a precio reducido.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1268
+        },
+        {
+          "name": "Gonzalo Villar",
+          "team": "Elche",
+          "rationale": "12 puntos en 2 jornadas a pesar de la derrota abultada.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1273
+        },
+        {
+          "name": "Buonanotte",
+          "team": "Elche",
+          "rationale": "Talento diferencial para liderar la salvación ilicitana.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1281
+        },
+        {
+          "name": "Javi Hernández",
+          "team": "RCD Espanyol",
+          "rationale": "9 puntos en el medio campo perico.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1288
+        },
+        {
+          "name": "Cala",
+          "team": "RCD Espanyol",
+          "rationale": "11 puntos en 2 fechas de atacante.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1293
+        },
+        {
+          "name": "Dolan",
+          "team": "RCD Espanyol",
+          "rationale": "14 puntos acumulados y buen arranque liguero.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1297
+        },
+        {
+          "name": "Unai Núñez",
+          "team": "RCD Espanyol",
+          "rationale": "13 puntos en dos jornadas como central perico.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1300
+        },
+        {
+          "name": "Djené",
+          "team": "Getafe",
+          "rationale": "14 puntos acumulados, pilar indiscutible de Bordalás.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1303
+        },
+        {
+          "name": "Ramón Terrats",
+          "team": "Getafe",
+          "rationale": "11 puntos en dos partidos en la medular azulona.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1308
+        },
+        {
+          "name": "Pablo Ramón",
+          "team": "Racing de Santander",
+          "rationale": "11 puntos sumados con grandes registros defensivos.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1317
+        },
+        {
+          "name": "Unai López",
+          "team": "Rayo Vallecano",
+          "rationale": "12 puntos en dos fechas, especialista a balón parado.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1322
+        },
+        {
+          "name": "Dani Cárdenas",
+          "team": "Rayo Vallecano",
+          "rationale": "Asume la portería titular tras la grave lesión de Batalla.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1327
+        },
+        {
+          "name": "Bernardo Silva",
+          "team": "Real Madrid",
+          "rationale": "4 puntos en su debut; rentable únicamente a precio de mercado.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1336
+        },
+        {
+          "name": "Fede Valverde",
+          "team": "Real Madrid",
+          "rationale": "6 puntos y regularidad, pero sin sobrepujar por encima de VM.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1341
+        },
+        {
+          "name": "Yangel Herrera",
+          "team": "Real Sociedad",
+          "rationale": "6 puntos y buen inicio de temporada en el mediocampo txuri-urdin.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1350
+        },
+        {
+          "name": "Sangante",
+          "team": "Sevilla",
+          "rationale": "13 puntos en dos fechas, central que suma porterías a cero.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1356
+        },
+        {
+          "name": "Juan Iglesias",
+          "team": "Sevilla",
+          "rationale": "7 puntos en dos jornadas adueñándose del carril derecho.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1371
+        },
+        {
+          "name": "Pepelu",
+          "team": "Valencia",
+          "rationale": "8 puntos en su debut, lanzador de balón parado ché.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1382
+        },
+        {
+          "name": "César Tárrega",
+          "team": "Valencia",
+          "rationale": "10 puntos y portería a cero de central titular.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1387
+        },
+        {
+          "name": "Juan Foyth",
+          "team": "Villarreal",
+          "rationale": "8 puntos en dos jornadas; barato y con demanda continua.",
+          "recommendation": "Comprar a VM",
+          "timestampSeconds": 1392
+        }
+      ],
+      "notes": [
+        {
+          "text": "En esta categoría el objetivo es especular o completar alineaciones sin arriesgar sobrepujas excesivas.",
+          "timestampSeconds": 958
+        }
+      ]
+    },
+    {
+      "id": "ventas-obligatorias",
+      "title": "Ventas Fantasy Obligatorias",
+      "subtitle": "Futbolistas en clara devaluación o pérdida de rol que deben venderse",
+      "category": "venta",
+      "minBudgetMillions": -1,
+      "maxBudgetMillions": -1,
+      "players": [
+        {
+          "name": "Ruiz de Galarreta",
+          "team": "Athletic Club",
+          "rationale": "0 puntos en dos jornadas y pérdida de protagonismo.",
+          "recommendation": "Venta obligatoria",
+          "timestampSeconds": 1522
+        },
+        {
+          "name": "Laporte",
+          "team": "Athletic Club",
+          "rationale": "Precio excesivamente alto para los 4 puntos sumados en J2.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1535
+        },
+        {
+          "name": "Jauregizar",
+          "team": "Athletic Club",
+          "rationale": "0 puntos y pérdida de confianza tras la primera jornada.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1544
+        },
+        {
+          "name": "Sancet",
+          "team": "Athletic Club",
+          "rationale": "5 puntos y tendencia a la baja tras la derrota en casa.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1549
+        },
+        {
+          "name": "Nico Williams",
+          "team": "Athletic Club",
+          "rationale": "Solo 3 puntos en J2 y rendimiento por debajo de su alto valor.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1555
+        },
+        {
+          "name": "Yuri Berchiche",
+          "team": "Athletic Club",
+          "rationale": "Expulsado con -2 puntos; se perderá la siguiente jornada.",
+          "recommendation": "Venta inmediata",
+          "timestampSeconds": 1565
+        },
+        {
+          "name": "Hjulmand",
+          "team": "Atlético de Madrid",
+          "rationale": "Solo 3 puntos en dos partidos y cometiendo penalti.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1575
+        },
+        {
+          "name": "Lookman",
+          "team": "Atlético de Madrid",
+          "rationale": "Pobre inicio de temporada con 6 puntos acumulados.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1582
+        },
+        {
+          "name": "Marcos Llorente",
+          "team": "Atlético de Madrid",
+          "rationale": "Suplente y sin rol fijo en el esquema.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1587
+        },
+        {
+          "name": "Robin Le Normand",
+          "team": "Atlético de Madrid",
+          "rationale": "Expulsado con -1 punto y sanción pendiente.",
+          "recommendation": "Venta obligatoria",
+          "timestampSeconds": 1590
+        },
+        {
+          "name": "Cuti Romero",
+          "team": "Atlético de Madrid",
+          "rationale": "Dudoso y sin minutos en este arranque.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1594
+        },
+        {
+          "name": "Julián Álvarez",
+          "team": "Atlético de Madrid",
+          "rationale": "2 puntos en su debut; no compensa su altísimo precio.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1597
+        },
+        {
+          "name": "Grimaldo",
+          "team": "Atlético de Madrid",
+          "rationale": "Solo 4 puntos en dos partidos y devaluándose.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1600
+        },
+        {
+          "name": "Álex Balde",
+          "team": "FC Barcelona",
+          "rationale": "Lesionado y con posible salida del club.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1604
+        },
+        {
+          "name": "Gavi",
+          "team": "FC Barcelona",
+          "rationale": "Lesión de rodilla que provocará caída inmediata de valor.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1608
+        },
+        {
+          "name": "Koundé",
+          "team": "FC Barcelona",
+          "rationale": "2 puntos en J2 y suplente en el estreno.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1622
+        },
+        {
+          "name": "Pau Cubarsí",
+          "team": "FC Barcelona",
+          "rationale": "0 puntos en dos jornadas, rotando y devaluándose.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1624
+        },
+        {
+          "name": "Dani Olmo",
+          "team": "FC Barcelona",
+          "rationale": "Solo 2 puntos sin titularidad asegurada aún.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1628
+        },
+        {
+          "name": "Isco",
+          "team": "Real Betis",
+          "rationale": "4 puntos en J2 y caída de valor continuada.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1632
+        },
+        {
+          "name": "Borja Iglesias",
+          "team": "Celta de Vigo",
+          "rationale": "0 puntos en dos jornadas y posible salida en el mercado.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1643
+        },
+        {
+          "name": "Fer Niño",
+          "team": "Elche",
+          "rationale": "3 puntos en 2 partidos y pérdida de valor.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1650
+        },
+        {
+          "name": "Affengruber",
+          "team": "Elche",
+          "rationale": "Puntuación de -2 en J2 y gran depreciación económica.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1655
+        },
+        {
+          "name": "Satriano",
+          "team": "Getafe",
+          "rationale": "Sin el rendimiento goleador esperado en liga.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1659
+        },
+        {
+          "name": "Etta Eyong",
+          "team": "Levante",
+          "rationale": "1 punto en su casillero fantasy y pérdida de fuelle.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1670
+        },
+        {
+          "name": "Carlos Álvarez",
+          "team": "Levante",
+          "rationale": "0 puntos y tendencia negativa en su precio.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1674
+        },
+        {
+          "name": "Chupe",
+          "team": "Málaga",
+          "rationale": "Solo 1 punto y próximo rival muy exigente.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1677
+        },
+        {
+          "name": "Larrubia",
+          "team": "Málaga",
+          "rationale": "1 punto en su casillero y visita al Bernabéu en el horizonte.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1684
+        },
+        {
+          "name": "Juan Cruz",
+          "team": "Málaga",
+          "rationale": "-1 punto acumulado y devaluación en curso.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1691
+        },
+        {
+          "name": "Isi Palazón",
+          "team": "Rayo Vallecano",
+          "rationale": "Lesión muscular y bajo rendimiento inicial.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1703
+        },
+        {
+          "name": "Augusto Batalla",
+          "team": "Rayo Vallecano",
+          "rationale": "Fractura de tibia y varios meses de baja.",
+          "recommendation": "Venta urgente",
+          "timestampSeconds": 1708
+        },
+        {
+          "name": "Ratiu",
+          "team": "Rayo Vallecano",
+          "rationale": "7 puntos en dos jornadas pero con bajada de precio inminente.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1713
+        },
+        {
+          "name": "Lejeune",
+          "team": "Rayo Vallecano",
+          "rationale": "6 puntos y tendencia bajista ante un calendario difícil.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1717
+        },
+        {
+          "name": "Vinicius Jr.",
+          "team": "Real Madrid",
+          "rationale": "2 puntos en su debut y desconectado; no justifica los 107M.",
+          "recommendation": "Venta clara",
+          "timestampSeconds": 1720
+        },
+        {
+          "name": "Diomande",
+          "team": "Real Madrid",
+          "rationale": "2 puntos y sin hueco en el once titular.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1734
+        },
+        {
+          "name": "Cucurella",
+          "team": "Real Madrid",
+          "rationale": "2 puntos y suplente en la primera jornada.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1738
+        },
+        {
+          "name": "Tchouaméni",
+          "team": "Real Madrid",
+          "rationale": "Lesionado y con 0 puntos en su casillero.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1748
+        },
+        {
+          "name": "Rüdiger",
+          "team": "Real Madrid",
+          "rationale": "0 puntos por suplencia ante el buen momento de Konaté.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1751
+        },
+        {
+          "name": "Brahim Díaz",
+          "team": "Real Madrid",
+          "rationale": "Sin minutos disputados en el debut liguero.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1755
+        },
+        {
+          "name": "Dumfries",
+          "team": "Real Madrid",
+          "rationale": "2 puntos y dudas sobre su titularidad en el lateral.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1760
+        },
+        {
+          "name": "Oyarzabal",
+          "team": "Real Sociedad",
+          "rationale": "2 puntos en dos fechas y rendimiento muy pobre.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1767
+        },
+        {
+          "name": "Barrenetxea",
+          "team": "Real Sociedad",
+          "rationale": "0 puntos en dos jornadas por problemas físicos.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1770
+        },
+        {
+          "name": "Gonçalo Guedes",
+          "team": "Real Sociedad",
+          "rationale": "Lesionado y con 0 puntos aportados.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1775
+        },
+        {
+          "name": "De Haas",
+          "team": "Valencia",
+          "rationale": "Esguince de tobillo con baja confirmada de al menos una semana.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1780
+        },
+        {
+          "name": "Luiz Júnior",
+          "team": "Villarreal",
+          "rationale": "7 puntos pero dejando muchas dudas defensivas.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1790
+        },
+        {
+          "name": "Mouriño",
+          "team": "Villarreal",
+          "rationale": "2 puntos y fragilidad defensiva evidente.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1795
+        },
+        {
+          "name": "Carlos Romero",
+          "team": "Villarreal",
+          "rationale": "4 puntos acumulados y rendimiento irregular.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1798
+        },
+        {
+          "name": "Santi Comesaña",
+          "team": "Villarreal",
+          "rationale": "3 puntos y cometiendo penalti en la jornada 1.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1802
+        },
+        {
+          "name": "Renato Veiga",
+          "team": "Villarreal",
+          "rationale": "6 puntos y zaga muy castigada por goles encajados.",
+          "recommendation": "Vender",
+          "timestampSeconds": 1805
+        }
+      ],
+      "notes": [
+        {
+          "text": "Mantener jugadores en caída libre de precio perjudica gravemente el presupuesto a largo plazo.",
+          "timestampSeconds": 1500
+        }
+      ]
+    },
+    {
+      "id": "dudas-fantasy",
+      "title": "Dudas Fantasy",
+      "subtitle": "Futbolistas en situación incierta que requieren valoración caso a caso",
+      "category": "duda",
+      "minBudgetMillions": -1,
+      "maxBudgetMillions": -1,
+      "players": [
+        {
+          "name": "Unai Simón",
+          "team": "Athletic Club",
+          "rationale": "1 punto en J2 tras fallo en despeje; si no se tiene sustituto garantizado, no vender.",
+          "recommendation": "Mantener solo si no hay relevo seguro en mercado",
+          "timestampSeconds": 1900
+        },
+        {
+          "name": "Pedri",
+          "team": "FC Barcelona",
+          "rationale": "3 puntos en su debut; jugador carísimo en tierra de nadie que podría tener minutos en J3.",
+          "recommendation": "Mantener o vender según necesidad económica",
+          "timestampSeconds": 1933
+        },
+        {
+          "name": "Diego Llorente",
+          "team": "Real Betis",
+          "rationale": "0 puntos en dos jornadas ante la irrupción de Bartra; jugará en rotaciones intersemanales.",
+          "recommendation": "Vender si se necesita reinvertir el dinero",
+          "timestampSeconds": 1961
+        },
+        {
+          "name": "Starfelt",
+          "team": "Celta de Vigo",
+          "rationale": "0 puntos en 2 fechas; si tocó en equipo inicial se puede aguantar, de lo contrario vender.",
+          "recommendation": "Valorar según procedencia en plantilla",
+          "timestampSeconds": 1988
+        },
+        {
+          "name": "Yeremay",
+          "team": "Deportivo",
+          "rationale": "Convocado con opción de minutos; vigilar su rendimiento para decidir.",
+          "recommendation": "Monitorear en directo",
+          "timestampSeconds": 2012
+        },
+        {
+          "name": "Budimir",
+          "team": "Osasuna",
+          "rationale": "0 puntos en 2 jornadas, pero con opciones de mejorar en las próximas fechas.",
+          "recommendation": "Mantener en observación",
+          "timestampSeconds": 2029
+        },
+        {
+          "name": "Catena",
+          "team": "Osasuna",
+          "rationale": "0 puntos acumulados; el calendario a corto plazo puede reactivarle.",
+          "recommendation": "Mantener en observación",
+          "timestampSeconds": 2039
+        },
+        {
+          "name": "Boyomo",
+          "team": "Osasuna",
+          "rationale": "0 puntos y rumores de traspaso hacia Inglaterra; estar muy atentos.",
+          "recommendation": "Vigilar mercado de fichajes",
+          "timestampSeconds": 2048
+        },
+        {
+          "name": "Moleiro",
+          "team": "Villarreal",
+          "rationale": "11 puntos en 2 partidos, pero sustituido temprano y con precio muy elevado.",
+          "recommendation": "No invertir a sobrepuja",
+          "timestampSeconds": 2081
+        },
+        {
+          "name": "Pape Gueye",
+          "team": "Villarreal",
+          "rationale": "10 puntos acumulados; buen rendimiento pero con rumores de salida.",
+          "recommendation": "Mantener a valor de mercado",
+          "timestampSeconds": 2110
+        },
+        {
+          "name": "Gerard Moreno",
+          "team": "Villarreal",
+          "rationale": "13 puntos y gol saliendo desde el banquillo; Ayoze Pérez seguirá de titular.",
+          "recommendation": "Mantener como revulsivo de lujo",
+          "timestampSeconds": 2123
+        }
+      ],
+      "notes": [
+        {
+          "text": "Los jugadores estables que suben o bajan cantidades mínimas quedan al criterio de cada mánager.",
+          "timestampSeconds": 1845
+        }
+      ]
+    },
+    {
+      "id": "cambios-de-tendencia",
+      "title": "Cambios de Tendencia",
+      "subtitle": "Futbolistas que pasan de bajada a subida de valor inminente",
+      "category": "especulación",
+      "minBudgetMillions": 5,
+      "maxBudgetMillions": 10,
+      "players": [
+        {
+          "name": "Rodri Hernández",
+          "team": "FC Barcelona",
+          "rationale": "Frenó su caída tras perder valor inicial; con su debut cercano su precio explotará al alza.",
+          "recommendation": "Comprar inmediatamente antes de que suba",
+          "timestampSeconds": 2214
+        },
+        {
+          "name": "Marc Pubill",
+          "team": "Atlético de Madrid",
+          "rationale": "Golazo en J2 tras frenar su caída; se revalorizará como uno de los mejores defensas fantasy.",
+          "recommendation": "Fichar como top compra",
+          "timestampSeconds": 2307
+        },
+        {
+          "name": "Abde Ezzalzouli",
+          "team": "Real Betis",
+          "rationale": "Baja en J1 aplazada pero listo para la J3; recuperará toda la pérdida de valor en cuanto reciba el alta.",
+          "recommendation": "Comprar a VM pensando en la Jornada 3",
+          "timestampSeconds": 2392
+        },
+        {
+          "name": "Pathé Ciss",
+          "team": "Rayo Vallecano",
+          "rationale": "Gran rendimiento deportivo pero en conflicto extradeportivo por querer salir traspasado.",
+          "recommendation": "Comprar solo para especular económicamente a corto plazo",
+          "timestampSeconds": 2493
+        }
+      ],
+      "notes": [
+        {
+          "text": "Aprovechar el suelo de valor en jugadores diferenciales garantiza una fuerte plusvalía en pocos días.",
+          "timestampSeconds": 2240
+        }
+      ]
+    }
+  ]
+}

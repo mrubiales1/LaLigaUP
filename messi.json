@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "type": "messi",
+  "video": {
+    "id": "KuVZomNL678",
+    "title": "Los MEJORES JUGADORES para la JORNADA 3 de LA LIGA FANTASY 26/27",
+    "url": "https://www.youtube.com/watch?v=KuVZomNL678",
+    "publishedAt": "2026-08-27T16:03:34+00:00",
+    "updatedAt": "2026-08-27T16:03:35+00:00",
+    "thumbnailUrl": "https://i.ytimg.com/vi/KuVZomNL678/hqdefault.jpg"
+  },
+  "generatedAt": "2026-08-27T16:24:07.570Z",
+  "matchday": 3,
+  "summary": "Recomendaciones y análisis de alineaciones Messi de cara a la Jornada 3 de LaLiga Fantasy, destacando apuestas clave y gestión de presupuestos tras los partidos aplazados.",
+  "sections": [
+    {
+      "id": "avisos-generales",
+      "title": "Avisos de la Jornada",
+      "subtitle": "Cierre de mercado y estrategia",
+      "category": "avisos",
+      "minBudgetMillions": -1,
+      "maxBudgetMillions": -1,
+      "players": [],
+      "notes": [
+        {
+          "text": "La jornada 3 arranca el viernes a las 19:00h, hora límite para ejecutar cláusulas y ultimar el once.",
+          "timestampSeconds": 41
+        },
+        {
+          "text": "Se recomienda aprovechar las subidas de valor para generar liquidez de cara a las próximas jornadas.",
+          "timestampSeconds": 475
+        }
+      ]
+    },
+    {
+      "id": "porteros",
+      "title": "Porteros",
+      "subtitle": "Opciones bajo palos para la Jornada 3",
+      "category": "porteros",
+      "minBudgetMillions": -1,
+      "maxBudgetMillions": -1,
+      "players": [
+        {
+          "name": "Leo Román",
+          "team": "RCD Mallorca",
+          "rationale": "Gran solidez defensiva y regularidad demostrada en las primeras jornadas.",
+          "recommendation": "Alinear",
+          "timestampSeconds": 288
+        },
+        {
+          "name": "Stole Dimitrievski",
+          "team": "Valencia CF",
+          "rationale": "Perfil fiable para asegurar puntos en duelos disputados.",
+          "recommendation": "Fichar / Alinear",
+          "timestampSeconds": 415
+        },
+        {
+          "name": "Álvaro Valles",
+          "team": "Real Betis",
+          "rationale": "Inicio de curso impecable con promedios excelentes de puntuación.",
+          "recommendation": "Alinear",
+          "timestampSeconds": 633
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "defensas",
+      "title": "Defensas",
+      "subtitle": "Zagueros destacados y rentables",
+      "category": "defensas",
+      "minBudgetMillions": -1,
+      "maxBudgetMillions": -1,
+      "players": [
+        {
+          "name": "Marc Cucurella",
+          "team": "Getafe CF",
+          "rationale": "Se perfila como titular con alta probabilidad de dejar la portería a cero.",
+          "recommendation": "Alinear",
+          "timestampSeconds": 260
+        },
+        {
+          "name": "Álex Grimaldo",
+          "team": "Real Sociedad",
+          "rationale": "Aporte ofensivo continuo y regularidad en pases clave.",
+          "recommendation": "Alinear",
+          "timestampSeconds": 273
+        },
+        {
+          "name": "Juan Foyth",
+          "team": "Villarreal CF",
+          "rationale": "Garantía de rendimiento y capacidad para marcar diferencias en defensa.",
+          "recommendation": "Alinear",
+          "timestampSeconds": 277
+        },
+        {
+          "name": "Djené",
+          "team": "Getafe CF",
+          "rationale": "Especialista en despejes y acciones defensivas contundentes.",
+          "recommendation": "Fichar",
+          "timestampSeconds": 535
+        },
+        {
+          "name": "Dean Huijsen",
+          "team": "Real Madrid",
+          "rationale": "Fijo en el esquema y con gran promedio de puntuación sin encajar.",
+          "recommendation": "Alinear",
+          "timestampSeconds": 870
+        },
+        {
+          "name": "Marc Bartra",
+          "team": "Real Betis",
+          "rationale": "Titularidad garantizada en un choque propicio para sumar.",
+          "recommendation": "Alinear",
+          "timestampSeconds": 994
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "centrocampistas",
+      "title": "Centrocampistas",
+      "subtitle": "Generadores de juego y llegadores",
+      "category": "centrocampistas",
+      "minBudgetMillions": -1,
+      "maxBudgetMillions": -1,
+      "players": [
+        {
+          "name": "Jude Bellingham",
+          "team": "Real Madrid",
+          "rationale": "Pilar indiscutible con llegada al área rival y altas puntuaciones.",
+          "recommendation": "Alinear",
+          "timestampSeconds": 234
+        },
+        {
+          "name": "Dani Olmo",
+          "team": "FC Barcelona",
+          "rationale": "Apuesta diferencial con potencial de titularidad y gran impacto ofensivo.",
+          "recommendation": "Alinear / Especular",
+          "timestampSeconds": 245
+        },
+        {
+          "name": "Lorenzo Amatucci",
+          "team": "Levante UD",
+          "rationale": "Rendimiento ascendente y titular consolidado a buen precio.",
+          "recommendation": "Fichar",
+          "timestampSeconds": 345
+        },
+        {
+          "name": "Facundo Buonanotte",
+          "team": "Elche CF",
+          "rationale": "Oportunidad de mercado para generar valor y sumar en ataque.",
+          "recommendation": "Fichar / Chollo",
+          "timestampSeconds": 376
+        },
+        {
+          "name": "Kang-in Lee",
+          "team": "Atlético de Madrid",
+          "rationale": "Candidato ideal a la capitanía por su trascendencia en el juego.",
+          "recommendation": "Capitán",
+          "timestampSeconds": 600
+        },
+        {
+          "name": "Álex Baena",
+          "team": "Villarreal CF",
+          "rationale": "Capacidad diferencial para generar ocasiones y asistir.",
+          "recommendation": "Alinear / Capitán",
+          "timestampSeconds": 1076
+        },
+        {
+          "name": "Takefusa Kubo",
+          "team": "Real Sociedad",
+          "rationale": "Extremo desequilibrante en partidos con previsión de muchos goles.",
+          "recommendation": "Fichar / Alinear",
+          "timestampSeconds": 1011
+        },
+        {
+          "name": "Javi Guerra",
+          "team": "Valencia CF",
+          "rationale": "Gran presencia en área contraria e inicio anotador destacado.",
+          "recommendation": "Alinear",
+          "timestampSeconds": 946
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "delanteros",
+      "title": "Delanteros",
+      "subtitle": "Goleadores y referencias ofensivas",
+      "category": "delanteros",
+      "minBudgetMillions": -1,
+      "maxBudgetMillions": -1,
+      "players": [
+        {
+          "name": "Lamine Yamal",
+          "team": "FC Barcelona",
+          "rationale": "Desequilibrio constante y alta rentabilidad en fantasy.",
+          "recommendation": "Alinear",
+          "timestampSeconds": 215
+        },
+        {
+          "name": "Kylian Mbappé",
+          "team": "Real Madrid",
+          "rationale": "Referencia goleadora con opciones de grandes registros en casa.",
+          "recommendation": "Alinear",
+          "timestampSeconds": 219
+        },
+        {
+          "name": "Vinícius Jr.",
+          "team": "Real Madrid",
+          "rationale": "Jugador franquicia con enorme potencial de desborde y asistencias.",
+          "recommendation": "Alinear",
+          "timestampSeconds": 221
+        },
+        {
+          "name": "Iñigo Vicente",
+          "team": "Racing de Santander",
+          "rationale": "En racha y con alta probabilidad de sobresalir ante su rival.",
+          "recommendation": "Capitán",
+          "timestampSeconds": 738
+        },
+        {
+          "name": "Pierre-Emerick Aubameyang",
+          "team": "Atlético de Madrid",
+          "rationale": "Gran estado de forma goleador como referencia ofensiva.",
+          "recommendation": "Alinear / Capitán",
+          "timestampSeconds": 724
+        },
+        {
+          "name": "Georges Mikautadze",
+          "team": "Real Betis",
+          "rationale": "Delantero en alza que ofrece rentabilidad económica y puntos constantes.",
+          "recommendation": "Fichar / Alinear",
+          "timestampSeconds": 883
+        }
+      ],
+      "notes": []
+    }
+  ]
+}
